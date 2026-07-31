@@ -40,6 +40,85 @@ const direccionesLinks = [
     label: "Dirección de Seguridad Pública",
     href: "/direcciones/direccion-de-seguridad-publica",
   },
+  {
+    label: "Dirección de Obras Municipales",
+    href: "/direcciones/direccion-de-obras-municipales",
+  },
+  {
+    label: "Dirección Jurídica",
+    href: "/direcciones/direccion-juridica",
+  },
+  {
+    label: "Secretaría Municipal",
+    href: "/direcciones/secretaria-municipal",
+  },
+  {
+    label: "Dirección de Operaciones y Servicios",
+    href: "/direcciones/direccion-operaciones-y-servicios",
+  },
+  {
+    label: "Dirección de Medio Ambiente",
+    href: "/direcciones/direccion-de-medio-ambiente",
+  },
+  {
+    label: "SECPLA - Programa de Loteos Irregulares",
+    href: "/direcciones/secpla/programa-de-loteos-irregulares",
+  },
+];
+
+const didecoLinks = [
+  {
+    label: "Sobre la Dirección",
+    href: "/dideco/sobre-la-direccion",
+  },
+  {
+    label: "Departamento Social",
+    href: "/dideco/departamento-social",
+  },
+  {
+    label: "Cultura",
+    href: "/dideco/cultura",
+  },
+  {
+    label: "Equidad de Género",
+    heading: true,
+  },
+  {
+    label: "Programa de la Mujer",
+    href: "/dideco/equidad-genero/programa-de-la-mujer",
+  },
+  {
+    label: "Mujeres Jefas de Hogar",
+    href: "/dideco/equidad-genero/programa-mujeres-jefas-de-hogar",
+  },
+  {
+    label: "Diversidad y No Discriminación",
+    href: "/dideco/equidad-genero/programa-de-diversidad-y-no-discriminacion",
+  },
+  {
+    label: "Programas Sociales Municipales",
+    heading: true,
+  },
+  {
+    label: "Vivienda y Habitabilidad",
+    href: "/dideco/programas-sociales-municipales/programa-de-vivienda-y-habitabilidad",
+  },
+  {
+    label: "Acceso a la Justicia",
+    href: "/dideco/programas-sociales-municipales/acceso-a-la-justicia",
+  },
+  {
+    label: "Programa de Deportes",
+    href: "/dideco/programas-sociales-municipales/programa-de-deportes",
+  },
+  {
+    label: "Adulto Mayor",
+    href: "/dideco/programas-sociales-municipales/programa-del-adulto-mayor",
+  },
+  {
+    label: "Discapacidad e Inclusión",
+    href: "/dideco/programas-sociales-municipales/programa-de-discapacidad-e-inclusion",
+  },
 ];
 
 export default function Header() {
@@ -75,7 +154,7 @@ export default function Header() {
             />
           </Link>
 
-          <div className="hidden items-center gap-10 md:flex">
+          <div className="hidden items-center gap-6 lg:gap-10 md:flex">
             <Link
               className="text-[17px] font-semibold tracking-[0.02em] text-white transition hover:text-[#8fc5ff]"
               href="/"
@@ -128,12 +207,37 @@ export default function Header() {
                 </div>
               </div>
             </div>
-            <Link
-              className="text-[17px] font-semibold tracking-[0.02em] text-white transition hover:text-[#8fc5ff]"
-              href="/#dideco"
-            >
-              DIDECO
-            </Link>
+            <div className="group relative">
+              <Link
+                className="text-[17px] font-semibold tracking-[0.02em] text-white transition hover:text-[#8fc5ff]"
+                href="/#dideco"
+              >
+                DIDECO
+              </Link>
+
+              <div className="pointer-events-none absolute left-1/2 top-full w-[330px] -translate-x-1/2 pt-7 opacity-0 transition duration-200 group-hover:pointer-events-auto group-hover:opacity-100 group-focus-within:pointer-events-auto group-focus-within:opacity-100">
+                <div className="max-h-[calc(100vh-150px)] overflow-y-auto rounded-lg bg-white text-[#00174a] shadow-2xl ring-1 ring-slate-200">
+                  {didecoLinks.map((item) =>
+                    "heading" in item ? (
+                      <p
+                        key={item.label}
+                        className="border-b border-slate-100 bg-[#f8fbff] px-5 py-3 text-xs font-black uppercase tracking-[0.14em] text-[#2a5298]"
+                      >
+                        {item.label}
+                      </p>
+                    ) : (
+                      <Link
+                        key={item.href}
+                        href={item.href}
+                        className="block border-b border-slate-100 px-5 py-3 text-sm font-black transition last:border-b-0 hover:bg-blue-50 hover:text-[#0b4ca8]"
+                      >
+                        {item.label}
+                      </Link>
+                    ),
+                  )}
+                </div>
+              </div>
+            </div>
             <Link
               className="text-[17px] font-semibold tracking-[0.02em] text-white transition hover:text-[#8fc5ff]"
               href="/#contacto"
@@ -195,13 +299,30 @@ export default function Header() {
                   </Link>
                 ))}
               </div>
-              <Link
-                className="block rounded-md px-3 py-3 text-sm font-black text-white hover:bg-white/10"
-                href="/#dideco"
-                onClick={() => setMobileOpen(false)}
-              >
-                DIDECO
-              </Link>
+              <div className="rounded-md bg-white/5 p-2">
+                <p className="px-2 py-2 text-xs font-black uppercase tracking-[0.16em] text-[#ffd44d]">
+                  DIDECO
+                </p>
+                {didecoLinks.map((item) =>
+                  "heading" in item ? (
+                    <p
+                      key={item.label}
+                      className="px-3 pb-1 pt-4 text-[11px] font-black uppercase tracking-[0.14em] text-[#ffd44d]"
+                    >
+                      {item.label}
+                    </p>
+                  ) : (
+                    <Link
+                      key={item.href}
+                      className="block rounded-md px-3 py-3 text-sm font-bold text-white/95 hover:bg-white/10"
+                      href={item.href}
+                      onClick={() => setMobileOpen(false)}
+                    >
+                      {item.label}
+                    </Link>
+                  ),
+                )}
+              </div>
               <Link
                 className="block rounded-md px-3 py-3 text-sm font-black text-white hover:bg-white/10"
                 href="/#contacto"
