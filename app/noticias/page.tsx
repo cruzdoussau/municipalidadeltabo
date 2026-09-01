@@ -12,6 +12,8 @@ type CategoriaNoticia =
   | "Deportes"
   | "Cultura"
   | "DIDECO"
+  | "Educación"
+  | "Empleo"
   | "Medio Ambiente"
   | "Salud"
   | "Seguridad";
@@ -22,6 +24,7 @@ type Noticia = {
   date: string;
   excerpt: string;
   image: string;
+  sourceUrl: string;
 };
 
 const categorias: { label: CategoriaNoticia; icon: string }[] = [
@@ -31,6 +34,8 @@ const categorias: { label: CategoriaNoticia; icon: string }[] = [
   { label: "Deportes", icon: "⚽" },
   { label: "Cultura", icon: "🎭" },
   { label: "DIDECO", icon: "🤝" },
+  { label: "Educación", icon: "📚" },
+  { label: "Empleo", icon: "💼" },
   { label: "Medio Ambiente", icon: "🌿" },
   { label: "Salud", icon: "🏥" },
   { label: "Seguridad", icon: "🛡️" },
@@ -38,76 +43,54 @@ const categorias: { label: CategoriaNoticia; icon: string }[] = [
 
 const noticias: Noticia[] = [
   {
-    title: "Mes del Deporte en El Tabo",
+    title: "OMIL de El Tabo realiza seminario sobre financiamiento y empleo",
+    category: "Empleo",
+    date: "27 de agosto de 2026",
+    excerpt:
+      "El seminario “Oportunidades que Crecen” reunió a emprendedores, microempresas y vecinos interesados en alternativas de financiamiento y herramientas para fortalecer sus iniciativas.",
+    image: "/images/home/noticias/agosto-2026-omil-seminario-financiamiento.jpg",
+    sourceUrl:
+      "https://eltabo.cl/omil-de-el-tabo-realiza-seminario-sobre-financiamiento-y-empleo/",
+  },
+  {
+    title: "Nace la Agrupación “Personas Mayores Gimnasia Sénior Las Cruces”.",
     category: "Deportes",
-    date: "Abril 2026",
+    date: "25 de agosto de 2026",
     excerpt:
-      "La comuna invita a vecinas y vecinos a participar en una programación especial de actividades deportivas durante el mes de abril.",
-    image:
-      "https://images.unsplash.com/photo-1517649763962-0c623066013b?auto=format&fit=crop&w=1200&q=80",
+      "La nueva organización comunitaria busca promover la actividad física, la vida saludable y la participación activa de personas mayores de Las Cruces.",
+    image: "/images/home/noticias/agosto-2026-gimnasia-senior-las-cruces.jpeg",
+    sourceUrl:
+      "https://eltabo.cl/nace-la-agrupacion-personas-mayores-gimnasia-senior-las-cruces/",
   },
   {
-    title: "Postulación a talleres municipales 2026",
-    category: "DIDECO",
-    date: "Abril 2026",
+    title: "Oferta laboral para abogada/o para desempeñarse en la Dirección Jurídica",
+    category: "Empleo",
+    date: "24 de agosto de 2026",
     excerpt:
-      "Ya se encuentra disponible la información de talleres deportivos, culturales, sociales, juveniles, infantiles y programas municipales.",
-    image:
-      "https://images.unsplash.com/photo-1517048676732-d65bc937f952?auto=format&fit=crop&w=1200&q=80",
+      "La Municipalidad de El Tabo abrió convocatoria para profesional del Derecho que brinde apoyo y asesoría jurídica en materias relacionadas con la gestión municipal.",
+    image: "/images/home/noticias/agosto-2026-oferta-laboral-abogada.png",
+    sourceUrl:
+      "https://eltabo.cl/oferta-laboral-para-abogada-o-para-desempenarse-en-la-direccion-juridica/",
   },
   {
-    title: "Feria de servicios municipales",
-    category: "Comunidad",
-    date: "Abril 2026",
+    title: "121 estudiantes de colegios de El Tabo reciben notebooks gracias a la Beca TIC de JUNAEB",
+    category: "Educación",
+    date: "13 de agosto de 2026",
     excerpt:
-      "Una nueva jornada de atención comunitaria permitirá acercar servicios municipales a distintos sectores de la comuna.",
-    image:
-      "https://images.unsplash.com/photo-1488459716781-31db52582fe9?auto=format&fit=crop&w=1200&q=80",
+      "Estudiantes de séptimo básico de la Escuela Las Cruces, Colegio Quillaycillo y Colegio El Tabo recibieron notebooks para apoyar sus procesos de aprendizaje.",
+    image: "/images/home/noticias/agosto-2026-beca-tic-junaeb.jpg",
+    sourceUrl:
+      "https://eltabo.cl/121-estudiantes-de-colegios-de-el-tabo-reciben-notebooks-gracias-a-la-beca-tic-de-junaeb/",
   },
   {
-    title: "Campaña de cuidado medioambiental",
+    title: "Feria Garaje invita a la comunidad a participar en espacio de reutilización y consumo responsable",
     category: "Medio Ambiente",
-    date: "Abril 2026",
+    date: "7 de agosto de 2026",
     excerpt:
-      "El municipio refuerza el llamado al cuidado de playas, quebradas y espacios naturales de la comuna.",
-    image:
-      "https://images.unsplash.com/photo-1500375592092-40eb2168fd21?auto=format&fit=crop&w=1200&q=80",
-  },
-  {
-    title: "Programa de beneficios sociales",
-    category: "DIDECO",
-    date: "Marzo 2026",
-    excerpt:
-      "Conoce información sobre subsidios, apoyo social municipal y orientación para familias de la comuna.",
-    image:
-      "https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?auto=format&fit=crop&w=1200&q=80",
-  },
-  {
-    title: "Nueva cartelera cultural comunal",
-    category: "Cultura",
-    date: "Marzo 2026",
-    excerpt:
-      "Actividades culturales, talleres y espacios de encuentro se desarrollan en distintos sectores de El Tabo.",
-    image:
-      "https://images.unsplash.com/photo-1529156069898-49953e39b3ac?auto=format&fit=crop&w=1200&q=80",
-  },
-  {
-    title: "Operativos de salud preventiva",
-    category: "Salud",
-    date: "Marzo 2026",
-    excerpt:
-      "La red municipal informa nuevas instancias de atención y orientación para promover el cuidado preventivo.",
-    image:
-      "https://images.unsplash.com/photo-1584515933487-779824d29309?auto=format&fit=crop&w=1200&q=80",
-  },
-  {
-    title: "Avances en seguridad comunitaria",
-    category: "Seguridad",
-    date: "Febrero 2026",
-    excerpt:
-      "El municipio continúa fortaleciendo acciones preventivas y coordinación territorial para la seguridad de la comunidad.",
-    image:
-      "https://images.unsplash.com/photo-1494526585095-c41746248156?auto=format&fit=crop&w=1200&q=80",
+      "La iniciativa fomenta la comercialización de productos de segunda mano y antigüedades, impulsando la reutilización y el consumo responsable en la comuna.",
+    image: "/images/home/noticias/agosto-2026-feria-garaje.png",
+    sourceUrl:
+      "https://eltabo.cl/feria-garaje-invita-a-la-comunidad-a-participar-en-espacio-de-reutilizacion-y-consumo-responsable/",
   },
 ];
 
@@ -258,12 +241,14 @@ export default function NoticiasPage() {
                   </p>
 
                   <div className="mt-6">
-                    <button
+                    <a
+                      href={item.sourceUrl}
+                      target="_blank"
+                      rel="noreferrer"
                       className="rounded-full bg-blue-700 px-6 py-3 text-sm font-black text-white shadow-md transition hover:bg-blue-800"
-                      type="button"
                     >
                       Leer noticia →
-                    </button>
+                    </a>
                   </div>
                 </div>
               </article>
