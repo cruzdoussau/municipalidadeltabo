@@ -80,6 +80,10 @@ const didecoLinks = [
     href: "/dideco/cultura",
   },
   {
+    label: "Programa de Asuntos Indígenas P.A.I",
+    href: "/dideco/cultura/programa-de-asuntos-indigenas-p-a-i",
+  },
+  {
     label: "Equidad de Género",
     heading: true,
   },
@@ -118,6 +122,66 @@ const didecoLinks = [
   {
     label: "Discapacidad e Inclusión",
     href: "/dideco/programas-sociales-municipales/programa-de-discapacidad-e-inclusion",
+  },
+  {
+    label: "Departamento de Desarrollo Económico Local",
+    heading: true,
+  },
+  {
+    label: "Fomento Productivo",
+    href: "/dideco/desarrollo-economico-local/oficina-de-fomento-productivo",
+  },
+  {
+    label: "Oficina de Información Laboral (OMIL)",
+    href: "/dideco/desarrollo-economico-local/omil",
+  },
+  {
+    label: "Oficina de Turismo",
+    href: "/dideco/desarrollo-economico-local/oficina-de-turismo",
+  },
+  {
+    label: "Departamento de Participación Ciudadana",
+    heading: true,
+  },
+  {
+    label: "Presupuestos Participativos",
+    href: "/dideco/participacion-ciudadana/presupuestos-participativos",
+  },
+  {
+    label: "Oficina de Subvenciones",
+    href: "/dideco/participacion-ciudadana/oficina-de-subvenciones",
+  },
+  {
+    label: "Departamento de Programas Externos",
+    heading: true,
+  },
+  {
+    label: "Condominio de Viviendas Tuteladas",
+    href: "/dideco/programas-externos/programa-condominio-de-viviendas-tuteladas-el-tabo",
+  },
+  {
+    label: "Programa CEDIAM El Tabo",
+    href: "/dideco/programas-externos/programa-cediam-el-tabo",
+  },
+  {
+    label: "Programa Familias",
+    href: "/dideco/programas-externos/programa-familias",
+  },
+  {
+    label: "Programa Vínculos 17°",
+    href: "/dideco/programas-externos/programa-vinculos-17",
+  },
+  {
+    label: "Departamento de Niñez y Juventud",
+    heading: true,
+  },
+  {
+    label: "Oficinas Locales de la Niñez",
+    href: "/dideco/ninez-y-juventud/oficinas-locales-de-la-ninez",
+  },
+  {
+    label: "Programa de Juventud",
+    href: "/dideco/ninez-y-juventud/programa-de-juventud",
   },
 ];
 
@@ -171,7 +235,7 @@ export default function Header() {
               </Link>
 
               <div className="pointer-events-none absolute left-1/2 top-full w-[310px] -translate-x-1/2 pt-7 opacity-0 transition duration-200 group-hover:pointer-events-auto group-hover:opacity-100 group-focus-within:pointer-events-auto group-focus-within:opacity-100">
-                <div className="overflow-hidden rounded-lg bg-white text-[#00174a] shadow-2xl ring-1 ring-slate-200">
+                <div className="max-h-[calc(100vh-150px)] overflow-y-auto rounded-lg bg-white text-[#00174a] shadow-2xl ring-1 ring-slate-200">
                   {municipalidadLinks.map((item) => (
                     <Link
                       key={item.href}
@@ -194,7 +258,7 @@ export default function Header() {
               </Link>
 
               <div className="pointer-events-none absolute left-1/2 top-full w-[300px] -translate-x-1/2 pt-7 opacity-0 transition duration-200 group-hover:pointer-events-auto group-hover:opacity-100 group-focus-within:pointer-events-auto group-focus-within:opacity-100">
-                <div className="overflow-hidden rounded-lg bg-white text-[#00174a] shadow-2xl ring-1 ring-slate-200">
+                <div className="max-h-[calc(100vh-150px)] overflow-y-auto rounded-lg bg-white text-[#00174a] shadow-2xl ring-1 ring-slate-200">
                   {direccionesLinks.map((item) => (
                     <Link
                       key={item.href}
@@ -258,7 +322,7 @@ export default function Header() {
         </div>
 
         {mobileOpen && (
-          <div className="border-t border-white/10 bg-[#00174a] px-4 pb-5 md:hidden">
+          <div className="max-h-[calc(100vh-122px)] overflow-y-auto border-t border-white/10 bg-[#00174a] px-4 pb-5 md:hidden">
             <div className="mx-auto max-w-[1040px] space-y-1 pt-3">
               <Link
                 className="block rounded-md px-3 py-3 text-sm font-black text-white hover:bg-white/10"
