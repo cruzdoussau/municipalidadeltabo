@@ -335,31 +335,32 @@ const videos = [
 
 const noticiasDestacadas = [
   {
-    kicker: "Conmemoración",
-    title: "Mes del Deporte",
-    text: "El Tabo invita a toda la comunidad a conmemorar el Mes del Deporte, a través de una serie de actividades que se realizarán durante abril. Eventos gestionados a través de la Dirección de Desarrollo Comunitario y su Programa de Deportes.",
-    color: "text-lime-400",
-    button: "bg-lime-400 text-[#061f5c]",
-    image:
-      "https://images.unsplash.com/photo-1517649763962-0c623066013b?auto=format&fit=crop&w=1200&q=80",
+    kicker: "Educación y tecnología",
+    title: "Estudiantes de colegios de El Tabo reciben notebooks gracias a la Beca TIC de JUNAEB",
+    text: "Estudiantes de El Tabo recibieron notebooks para apoyar sus procesos de aprendizaje y fortalecer el acceso a herramientas digitales.",
+    cardTitle: "Entrega de notebooks Beca TIC JUNAEB",
+    color: "text-[#1da7e0]",
+    button: "bg-[#1da7e0] text-white",
+    image: "/images/home/noticias/agosto-2026-beca-tic-junaeb.jpg",
   },
   {
-    kicker: "Exposición",
-    title: "Artesanos/as 2026",
-    text: "La comuna invita a vecinos y visitantes a conocer el trabajo de artesanos y artesanas locales, promoviendo nuestra identidad, creatividad y economía comunal.",
-    color: "text-emerald-400",
-    button: "bg-emerald-400 text-[#061f5c]",
-    image:
-      "https://images.unsplash.com/photo-1452860606245-08befc0ff44b?auto=format&fit=crop&w=1200&q=80",
+    kicker: "Infancia y familia",
+    title: "Celebremos a la Niñez en Familia",
+    text: "La Municipalidad invita a niñas, niños y familias a reunirse en el frontis municipal para disfrutar música en vivo, concursos, Zumba Kids, pinta caritas y entrega de colaciones.",
+    cardTitle: "Celebra la Niñez en Familia",
+    color: "text-[#f6c400]",
+    button: "bg-[#f6c400] text-[#061f5c]",
+    image: "/images/home/noticias/agosto-2026-celebra-la-ninez-en-familia.jpg",
   },
   {
-    kicker: "Postulaciones",
-    title: "Talleres 2026",
-    text: "El programa de la Mujer apertura sus postulaciones para los talleres 2026. Para inscribirse, las personas deben contar con Registro Social de Hogares en la comuna.",
-    color: "text-yellow-400",
-    button: "bg-yellow-400 text-[#061f5c]",
+    kicker: "Tradición y cultura",
+    title: "La cueca se vive con orgullo en El Tabo",
+    text: "El Campeonato Comunal de Cueca Adulto Mayor 2026 invita a la comunidad a apoyar a las parejas que buscarán representar a El Tabo en el Campeonato Nacional de Cueca Adulto Mayor de Tomé.",
+    cardTitle: "Campeonato Comunal de Cueca Adulto Mayor 2026",
+    color: "text-[#e30613]",
+    button: "bg-[#e30613] text-white",
     image:
-      "https://images.unsplash.com/photo-1517048676732-d65bc937f952?auto=format&fit=crop&w=1200&q=80",
+      "/images/home/noticias/764340089_18102853769180359_8041568145544355602_n.jpg",
   },
 ];
 const heroImages = [
@@ -530,12 +531,12 @@ function NoticiasSlider() {
             </p>
 
             <div className="mt-8 flex items-center gap-4">
-              <button
+              <Link
+                href="/noticias"
                 className={`rounded-md px-10 py-4 font-semibold shadow-sm ${noticia.button}`}
-                type="button"
               >
                 Leer Noticia
-              </button>
+              </Link>
 
               <button
                 onClick={prev}
@@ -588,7 +589,7 @@ function NoticiasSlider() {
               </span>
 
               <h3 className="mt-3 text-3xl font-black uppercase leading-tight text-white">
-                {noticia.kicker} {noticia.title}
+                {noticia.cardTitle}
               </h3>
             </div>
           </div>
