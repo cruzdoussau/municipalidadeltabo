@@ -336,8 +336,8 @@ const videos = [
 const noticiasDestacadas = [
   {
     kicker: "Educación y tecnología",
-    title: "Estudiantes de colegios de El Tabo reciben notebooks gracias a la Beca TIC de JUNAEB",
-    text: "Estudiantes de El Tabo recibieron notebooks para apoyar sus procesos de aprendizaje y fortalecer el acceso a herramientas digitales.",
+    title: "Estudiantes reciben notebooks Beca TIC JUNAEB",
+    text: "Estudiantes de El Tabo recibieron notebooks para apoyar sus procesos de aprendizaje.",
     cardTitle: "Entrega de notebooks Beca TIC JUNAEB",
     color: "text-[#1da7e0]",
     button: "bg-[#1da7e0] text-white",
@@ -484,7 +484,7 @@ function NoticiasSlider() {
     );
 
   return (
-    <section className="relative overflow-hidden bg-white py-14 pb-40 ">
+    <section className="relative overflow-hidden bg-white py-10 md:py-12">
       <div
         className="absolute inset-0 opacity-60"
         style={{
@@ -494,53 +494,53 @@ function NoticiasSlider() {
         }}
       />
 
-      <div className="relative mx-auto max-w-[1120px] px-4 pb-6">
-        <div className="mb-10 flex flex-wrap items-end justify-between gap-4">
+      <div className="relative mx-auto max-w-[1180px] px-4">
+        <div className="mb-8 flex flex-wrap items-end justify-between gap-4">
           <div>
-            <h2 className="text-4xl font-black tracking-tight text-[#061f5c]">
+            <h2 className="text-3xl font-black tracking-tight text-[#061f5c] md:text-4xl">
               Noticias destacadas
             </h2>
 
-            <p className="mt-2 text-lg text-[#17356f]">
+            <p className="mt-2 text-base text-[#17356f] md:text-lg">
               Revisa las últimas novedades de nuestra comuna.
             </p>
           </div>
 
            <Link
            href="/noticias"
-            className="rounded-full bg-blue-700 px-8 py-3 font-black text-white shadow-lg transition hover:bg-blue-800"
+            className="rounded-full bg-blue-700 px-6 py-3 text-sm font-black text-white shadow-lg transition hover:bg-blue-800 md:px-8"
           >
            Ver todas las noticias →
            </Link>
         </div>
 
-        <div className="grid items-center gap-10 md:grid-cols-[1.05fr_0.95fr]">
-          <div className="bg-white/90 p-2 md:p-6">
+        <div className="grid items-center gap-8 lg:grid-cols-[0.88fr_1.12fr]">
+          <div className="bg-white/90 p-2 md:p-4">
             <p
-              className={`text-5xl font-black uppercase leading-none tracking-tight ${noticia.color}`}
+              className={`text-2xl font-black uppercase leading-tight tracking-normal md:text-3xl ${noticia.color}`}
             >
               {noticia.kicker}
             </p>
 
-            <h3 className="mt-2 text-5xl font-light uppercase leading-tight text-slate-700 md:text-6xl">
+            <h3 className="mt-3 max-w-[620px] text-3xl font-black uppercase leading-[1.08] text-slate-700 md:text-4xl lg:text-5xl">
               {noticia.title}
             </h3>
 
-            <p className="mt-6 max-w-2xl text-base leading-relaxed text-slate-700">
+            <p className="mt-5 max-w-[600px] text-sm leading-7 text-slate-700 md:text-base">
               {noticia.text}
             </p>
 
-            <div className="mt-8 flex items-center gap-4">
+            <div className="mt-7 flex flex-wrap items-center gap-4">
               <Link
                 href="/noticias"
-                className={`rounded-md px-10 py-4 font-semibold shadow-sm ${noticia.button}`}
+                className={`rounded-md px-8 py-3.5 text-sm font-black shadow-sm ${noticia.button}`}
               >
                 Leer Noticia
               </Link>
 
               <button
                 onClick={prev}
-                className="grid h-12 w-12 place-items-center rounded-full bg-[#02075d] text-3xl font-black text-white shadow-lg"
+                className="grid h-11 w-11 place-items-center rounded-full bg-[#02075d] text-2xl font-black text-white shadow-lg"
                 aria-label="Noticia anterior"
                 type="button"
               >
@@ -549,7 +549,7 @@ function NoticiasSlider() {
 
               <button
                 onClick={next}
-                className="grid h-12 w-12 place-items-center rounded-full bg-[#02075d] text-3xl font-black text-white shadow-lg"
+                className="grid h-11 w-11 place-items-center rounded-full bg-[#02075d] text-2xl font-black text-white shadow-lg"
                 aria-label="Noticia siguiente"
                 type="button"
               >
@@ -574,7 +574,7 @@ function NoticiasSlider() {
             </div>
           </div>
 
-          <div className="relative h-[310px] overflow-hidden rounded-sm shadow-xl md:h-[340px]">
+          <div className="relative aspect-[16/9] overflow-hidden rounded-lg shadow-xl">
             <img
               src={noticia.image}
               alt={noticia.title}
@@ -583,12 +583,12 @@ function NoticiasSlider() {
 
             <div className="absolute inset-0 bg-gradient-to-t from-[#00174a]/75 via-transparent to-transparent" />
 
-            <div className="absolute bottom-6 left-6 right-6">
-              <span className="rounded bg-white px-3 py-1 text-xs font-black uppercase text-[#00174a]">
+            <div className="absolute bottom-5 left-5 right-5 md:bottom-6 md:left-6 md:right-6">
+              <span className="rounded bg-white px-3 py-1 text-[11px] font-black uppercase text-[#00174a] md:text-xs">
                 Noticia destacada
               </span>
 
-              <h3 className="mt-3 text-3xl font-black uppercase leading-tight text-white">
+              <h3 className="mt-3 max-w-[680px] text-2xl font-black uppercase leading-tight text-white md:text-3xl lg:text-4xl">
                 {noticia.cardTitle}
               </h3>
             </div>
