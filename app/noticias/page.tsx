@@ -92,6 +92,36 @@ const noticias: Noticia[] = [
     sourceUrl:
       "https://eltabo.cl/feria-garaje-invita-a-la-comunidad-a-participar-en-espacio-de-reutilizacion-y-consumo-responsable/",
   },
+  {
+    title: "Nuevo operativo de servicios veterinarios básicos",
+    category: "Medio Ambiente",
+    date: "5 de agosto de 2026",
+    excerpt:
+      "Vecinas y vecinos podrán inscribir a sus perros y gatos para acceder a desparasitación, vacunación antirrábica, vacuna óctuple e implantación de microchip en el operativo del Programa de Zoonosis.",
+    image:
+      "/images/home/noticias/765887042_1387126666929338_8729002024291502511_n.jpg",
+    sourceUrl: "/noticias",
+  },
+  {
+    title: "La cueca se vive con orgullo en El Tabo",
+    category: "Cultura",
+    date: "4 de agosto de 2026",
+    excerpt:
+      "El Campeonato Comunal de Cueca Adulto Mayor 2026 invita a la comunidad a apoyar a las parejas que buscarán representar a El Tabo en el Campeonato Nacional de Cueca Adulto Mayor de Tomé.",
+    image:
+      "/images/home/noticias/764340089_18102853769180359_8041568145544355602_n.jpg",
+    sourceUrl: "/noticias",
+  },
+  {
+    title: "Nuevas fechas de Muni en Terreno",
+    category: "Municipalidad",
+    date: "3 de agosto de 2026",
+    excerpt:
+      "El municipio anuncia nuevos operativos en Playas Blancas, Villa La Nación y sector Errázuriz, acercando servicios y orientaciones municipales a vecinas y vecinos de la comuna.",
+    image:
+      "/images/home/noticias/763500191_18102765068180359_8916356358256857674_n.jpg",
+    sourceUrl: "/noticias",
+  },
 ];
 
 export default function NoticiasPage() {
@@ -241,14 +271,23 @@ export default function NoticiasPage() {
                   </p>
 
                   <div className="mt-6">
-                    <a
-                      href={item.sourceUrl}
-                      target="_blank"
-                      rel="noreferrer"
-                      className="rounded-full bg-blue-700 px-6 py-3 text-sm font-black text-white shadow-md transition hover:bg-blue-800"
-                    >
-                      Leer noticia →
-                    </a>
+                    {item.sourceUrl.startsWith("http") ? (
+                      <a
+                        href={item.sourceUrl}
+                        target="_blank"
+                        rel="noreferrer"
+                        className="rounded-full bg-blue-700 px-6 py-3 text-sm font-black text-white shadow-md transition hover:bg-blue-800"
+                      >
+                        Leer noticia →
+                      </a>
+                    ) : (
+                      <Link
+                        href={item.sourceUrl}
+                        className="rounded-full bg-blue-700 px-6 py-3 text-sm font-black text-white shadow-md transition hover:bg-blue-800"
+                      >
+                        Leer noticia →
+                      </Link>
+                    )}
                   </div>
                 </div>
               </article>
