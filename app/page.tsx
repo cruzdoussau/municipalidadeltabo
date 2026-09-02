@@ -514,33 +514,33 @@ function NoticiasSlider() {
            </Link>
         </div>
 
-        <div className="grid items-center gap-8 lg:grid-cols-[0.88fr_1.12fr]">
-          <div className="bg-white/90 p-2 md:p-4">
+        <div className="grid items-center gap-6 rounded-2xl bg-white/90 p-5 shadow-sm ring-1 ring-slate-100 lg:grid-cols-[0.95fr_1.05fr] lg:p-7">
+          <div>
             <p
-              className={`text-2xl font-black uppercase leading-tight tracking-normal md:text-3xl ${noticia.color}`}
+              className={`text-base font-black uppercase leading-tight tracking-normal md:text-lg ${noticia.color}`}
             >
               {noticia.kicker}
             </p>
 
-            <h3 className="mt-3 max-w-[620px] text-3xl font-black uppercase leading-[1.08] text-slate-700 md:text-4xl lg:text-5xl">
+            <h3 className="mt-3 max-w-[560px] text-2xl font-black uppercase leading-[1.12] text-[#26364f] md:text-3xl">
               {noticia.title}
             </h3>
 
-            <p className="mt-5 max-w-[600px] text-sm leading-7 text-slate-700 md:text-base">
+            <p className="mt-4 max-w-[560px] text-sm leading-6 text-slate-700 md:text-[15px]">
               {noticia.text}
             </p>
 
-            <div className="mt-7 flex flex-wrap items-center gap-4">
+            <div className="mt-6 flex flex-wrap items-center gap-3">
               <Link
                 href="/noticias"
-                className={`rounded-md px-8 py-3.5 text-sm font-black shadow-sm ${noticia.button}`}
+                className={`rounded-md px-6 py-3 text-sm font-black shadow-sm ${noticia.button}`}
               >
                 Leer Noticia
               </Link>
 
               <button
                 onClick={prev}
-                className="grid h-11 w-11 place-items-center rounded-full bg-[#02075d] text-2xl font-black text-white shadow-lg"
+                className="grid h-10 w-10 place-items-center rounded-full bg-[#02075d] text-xl font-black text-white shadow-lg"
                 aria-label="Noticia anterior"
                 type="button"
               >
@@ -549,7 +549,7 @@ function NoticiasSlider() {
 
               <button
                 onClick={next}
-                className="grid h-11 w-11 place-items-center rounded-full bg-[#02075d] text-2xl font-black text-white shadow-lg"
+                className="grid h-10 w-10 place-items-center rounded-full bg-[#02075d] text-xl font-black text-white shadow-lg"
                 aria-label="Noticia siguiente"
                 type="button"
               >
@@ -574,21 +574,21 @@ function NoticiasSlider() {
             </div>
           </div>
 
-          <div className="relative aspect-[16/9] overflow-hidden rounded-lg shadow-xl">
+          <div className="relative aspect-[16/9] w-full overflow-hidden rounded-lg shadow-lg">
             <img
               src={noticia.image}
               alt={noticia.title}
               className="h-full w-full object-cover"
             />
 
-            <div className="absolute inset-0 bg-gradient-to-t from-[#00174a]/75 via-transparent to-transparent" />
+            <div className="absolute inset-0 bg-gradient-to-t from-[#00174a]/70 via-transparent to-transparent" />
 
-            <div className="absolute bottom-5 left-5 right-5 md:bottom-6 md:left-6 md:right-6">
+            <div className="absolute bottom-4 left-4 right-4 md:bottom-5 md:left-5 md:right-5">
               <span className="rounded bg-white px-3 py-1 text-[11px] font-black uppercase text-[#00174a] md:text-xs">
                 Noticia destacada
               </span>
 
-              <h3 className="mt-3 max-w-[680px] text-2xl font-black uppercase leading-tight text-white md:text-3xl lg:text-4xl">
+              <h3 className="mt-3 max-w-[560px] text-lg font-black uppercase leading-tight text-white md:text-2xl">
                 {noticia.cardTitle}
               </h3>
             </div>
