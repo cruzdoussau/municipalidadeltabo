@@ -93,6 +93,15 @@ const noticias: Noticia[] = [
       "https://eltabo.cl/feria-garaje-invita-a-la-comunidad-a-participar-en-espacio-de-reutilizacion-y-consumo-responsable/",
   },
   {
+    title: "Celebremos a la Niñez en Familia",
+    category: "Comunidad",
+    date: "6 de agosto de 2026",
+    excerpt:
+      "La Municipalidad invita a niñas, niños y familias a reunirse en el frontis municipal para disfrutar música en vivo, concursos, Zumba Kids, pinta caritas y entrega de colaciones.",
+    image: "/images/home/noticias/agosto-2026-celebra-la-ninez-en-familia.jpg",
+    sourceUrl: "/noticias",
+  },
+  {
     title: "Nuevo operativo de servicios veterinarios básicos",
     category: "Medio Ambiente",
     date: "5 de agosto de 2026",
