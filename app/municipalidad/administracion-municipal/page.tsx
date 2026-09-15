@@ -83,6 +83,16 @@ const subpages = [
     href: "/municipalidad/administracion-municipal/oficina-de-informatica",
     text: "Gestión tecnológica municipal, soporte, sistemas, redes y servicios digitales.",
   },
+  {
+    title: "Oficina de Transparencia",
+    href: "/municipalidad/administracion-municipal/oficina-de-transparencia",
+    text: "Acceso a información pública, transparencia activa y canales institucionales de atención.",
+  },
+  {
+    title: "Oficina de Infraestructura Municipal",
+    href: "/municipalidad/administracion-municipal/oficina-de-infraestructura-municipal",
+    text: "Habilitación, mantención y apoyo a proyectos de infraestructura en recintos municipales.",
+  },
 ];
 
 export const metadata: Metadata = {

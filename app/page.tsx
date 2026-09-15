@@ -6,12 +6,6 @@ import Link from "next/link";
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
 
-const logo = "/images/header/logo-el-tabo.png";
-const lobby = "/images/header/ley-lobby.png";
-const transparencia = "/images/header/transparencia-activa.png";
-const solicitar = "/images/header/solicitar-informacion.png";
-const oirs = "/images/header/oirs.png";
-
 const servicios = [
   {
     title: "Vecino Digital",
@@ -175,7 +169,7 @@ const accesos = [
   },
   {
     titulo: "Organizaciones Comunitarias",
-    href: "/organizaciones-comunitarias",
+    href: "/dideco/participacion-ciudadana/oficina-de-registro-de-organizaciones-comunitarias",
     icono: "/images/accesos-rapidos/organizaciones-comunitarias.png",
   },
 ];

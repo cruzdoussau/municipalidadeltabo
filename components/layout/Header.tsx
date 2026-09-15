@@ -9,6 +9,29 @@ const transparencia = "/images/header/transparencia-activa.png";
 const solicitar = "/images/header/solicitar-informacion.png";
 const oirs = "/images/header/oirs.png";
 
+const institutionalLinks = [
+  {
+    src: lobby,
+    alt: "Ley del Lobby",
+    href: "https://www.leylobby.gob.cl/instituciones/MU086",
+  },
+  {
+    src: transparencia,
+    alt: "Transparencia Activa",
+    href: "https://www.portaltransparencia.cl/PortalPdT/web/guest/directorio-de-organismos-regulados?p_p_id=pdtorganismos_WAR_pdtorganismosportlet&orgcode=dd4a4856fe4376f915d1ab0c61131f7b",
+  },
+  {
+    src: solicitar,
+    alt: "Solicitar información pública",
+    href: "https://www.portaltransparencia.cl/PortalPdT/pdtta?codOrganismo=MU086",
+  },
+  {
+    src: oirs,
+    alt: "Oficina de Informaciones, Reclamos y Sugerencias",
+    href: "https://docs.google.com/forms/d/e/1FAIpQLSfVz2Xfrb7pVS0A0V6IZkqOi3WgBtE-JOzCsGas6QVQYPp56w/viewform?usp=pp_url",
+  },
+];
+
 type MenuLink = {
   label: string;
   href: string;
@@ -26,6 +49,22 @@ const municipalidadLinks = [
   { label: "Consejo Comunal de Seguridad Pública", href: "/municipalidad/ccsp" },
   { label: "Juzgado de Policía Local", href: "/municipalidad/juzgado-policia-local" },
   { label: "Administración Municipal", href: "/municipalidad/administracion-municipal" },
+  {
+    label: "Oficina de Gabinete",
+    href: "/municipalidad/administracion-municipal/oficina-de-gabinete",
+  },
+  {
+    label: "Oficina de Informática",
+    href: "/municipalidad/administracion-municipal/oficina-de-informatica",
+  },
+  {
+    label: "Oficina de Transparencia",
+    href: "/municipalidad/administracion-municipal/oficina-de-transparencia",
+  },
+  {
+    label: "Oficina de Infraestructura Municipal",
+    href: "/municipalidad/administracion-municipal/oficina-de-infraestructura-municipal",
+  },
   { label: "Cuentas Públicas", href: "/cuentas-publicas" },
 ];
 
@@ -44,6 +83,10 @@ const direccionesSections: MenuSection[] = [
       {
         label: "Dirección de Salud",
         href: "/direcciones/direccion-de-salud",
+      },
+      {
+        label: "Programa Chile Crece Contigo",
+        href: "/direcciones/direccion-de-salud/programa-chile-crece-contigo",
       },
       {
         label: "Departamento de Educación",
@@ -180,6 +223,10 @@ const didecoSections: MenuSection[] = [
         href: "/dideco/participacion-ciudadana/presupuestos-participativos",
       },
       {
+        label: "Registro de Organizaciones Comunitarias",
+        href: "/dideco/participacion-ciudadana/oficina-de-registro-de-organizaciones-comunitarias",
+      },
+      {
         label: "Oficina de Subvenciones",
         href: "/dideco/participacion-ciudadana/oficina-de-subvenciones",
       },
@@ -249,15 +296,17 @@ export default function Header() {
     <header className="sticky top-0 z-50 w-full shadow-md">
       <div className="border-b border-slate-300 bg-[#e9ecef]">
         <div className="mx-auto flex h-[42px] max-w-[1040px] items-center justify-center gap-4 overflow-hidden px-4">
-          {[lobby, transparencia, solicitar, oirs].map((src, index) => (
+          {institutionalLinks.map((item) => (
             <a
-              key={src}
-              href="#"
+              key={item.href}
+              href={item.href}
+              target="_blank"
+              rel="noreferrer"
               className="flex shrink-0 items-center justify-center"
             >
               <img
-                src={src}
-                alt={`Logo institucional ${index + 1}`}
+                src={item.src}
+                alt={item.alt}
                 className="h-[30px] w-auto object-contain"
               />
             </a>
@@ -332,7 +381,7 @@ export default function Header() {
                 DIDECO
               </Link>
 
-              <div className="pointer-events-none absolute left-1/2 top-full w-[min(920px,calc(100vw-32px))] -translate-x-1/2 pt-7 opacity-0 transition duration-200 group-hover:pointer-events-auto group-hover:opacity-100 group-focus-within:pointer-events-auto group-focus-within:opacity-100">
+              <div className="pointer-events-none absolute right-0 top-full w-[min(920px,calc(100vw-32px))] pt-7 opacity-0 transition duration-200 group-hover:pointer-events-auto group-hover:opacity-100 group-focus-within:pointer-events-auto group-focus-within:opacity-100">
                 <div className="max-h-[calc(100vh-150px)] overflow-y-auto rounded-lg bg-white p-6 text-[#00174a] shadow-2xl ring-1 ring-slate-200">
                   <div className="grid gap-x-7 gap-y-8 md:grid-cols-3">
                     {didecoSections.map((section) => (
