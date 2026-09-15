@@ -4,140 +4,11 @@ import React from "react";
 import Link from "next/link";
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
-
-type CategoriaEvento =
-  | "Todos"
-  | "Cultura"
-  | "Deporte"
-  | "Comunidad"
-  | "Juventud"
-  | "Niñez"
-  | "Adulto Mayor"
-  | "Turismo";
-
-type Evento = {
-  fecha: string;
-  title: string;
-  tag: CategoriaEvento;
-  lugar: string;
-  text: string;
-  color: string;
-  image: string;
-};
-
-const categoriasEventos: { label: CategoriaEvento; icon: string }[] = [
-  { label: "Todos", icon: "" },
-  { label: "Cultura", icon: "📍" },
-  { label: "Deporte", icon: "⚽" },
-  { label: "Comunidad", icon: "👥" },
-  { label: "Juventud", icon: "🎨" },
-  { label: "Niñez", icon: "🧒" },
-  { label: "Adulto Mayor", icon: "♿" },
-  { label: "Turismo", icon: "🌴" },
-];
-
-const eventos: Evento[] = [
-  {
-    fecha: "12 ABR",
-    title: "Festival Costumbrista de El Tabo",
-    tag: "Cultura",
-    lugar: "Plaza principal · 18:00 hrs",
-    text: "Encuentro familiar con música, gastronomía y emprendedores locales.",
-    color: "bg-blue-600",
-    image:
-      "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=900&q=80",
-  },
-  {
-    fecha: "14 ABR",
-    title: "Corrida Familiar por la Comunidad",
-    tag: "Deporte",
-    lugar: "Costanera El Tabo",
-    text: "Actividad deportiva abierta a vecinas y vecinos de todas las edades.",
-    color: "bg-emerald-600",
-    image:
-      "https://images.unsplash.com/photo-1502904550040-7534597429ae?auto=format&fit=crop&w=900&q=80",
-  },
-  {
-    fecha: "16 ABR",
-    title: "Feria de Servicios Municipales",
-    tag: "Comunidad",
-    lugar: "Frontis Municipal",
-    text: "Actividad comunal de servicios hacia la comunidad en nuestro frontis municipal.",
-    color: "bg-yellow-600",
-    image:
-      "https://images.unsplash.com/photo-1488459716781-31db52582fe9?auto=format&fit=crop&w=900&q=80",
-  },
-  {
-    fecha: "17 ABR",
-    title: "Taller de Manualidades",
-    tag: "Juventud",
-    lugar: "Oficina de la Juventud",
-    text: "Ven a compartir y aprender en nuestro taller de manualidades de juventud.",
-    color: "bg-violet-600",
-    image:
-      "https://images.unsplash.com/photo-1517048676732-d65bc937f952?auto=format&fit=crop&w=900&q=80",
-  },
-  {
-    fecha: "20 ABR",
-    title: "Encuentro de Niñez y Familia",
-    tag: "Niñez",
-    lugar: "Plaza El Tabo",
-    text: "Jornada recreativa con juegos, actividades familiares y espacios de participación.",
-    color: "bg-sky-600",
-    image:
-      "https://images.unsplash.com/photo-1503454537195-1dcabb73ffb9?auto=format&fit=crop&w=900&q=80",
-  },
-  {
-    fecha: "22 ABR",
-    title: "Mateada del Adulto Mayor",
-    tag: "Adulto Mayor",
-    lugar: "Sede comunitaria",
-    text: "Encuentro comunitario para compartir, conversar y fortalecer la vida social.",
-    color: "bg-orange-500",
-    image:
-      "https://images.unsplash.com/photo-1516307365426-bea591f05011?auto=format&fit=crop&w=900&q=80",
-  },
-  {
-    fecha: "25 ABR",
-    title: "Ruta Turística Patrimonial",
-    tag: "Turismo",
-    lugar: "Borde costero",
-    text: "Recorrido guiado por espacios patrimoniales, naturales y culturales de la comuna.",
-    color: "bg-teal-600",
-    image:
-      "https://images.unsplash.com/photo-1500375592092-40eb2168fd21?auto=format&fit=crop&w=900&q=80",
-  },
-  {
-    fecha: "27 ABR",
-    title: "Muestra Artística Comunitaria",
-    tag: "Cultura",
-    lugar: "Casa de la Cultura",
-    text: "Presentaciones artísticas locales, música, danza y expresiones culturales de la comuna.",
-    color: "bg-blue-600",
-    image:
-      "https://images.unsplash.com/photo-1529156069898-49953e39b3ac?auto=format&fit=crop&w=900&q=80",
-  },
-  {
-    fecha: "29 ABR",
-    title: "Clínica Deportiva Infantil",
-    tag: "Deporte",
-    lugar: "Gimnasio Municipal",
-    text: "Actividad formativa para niñas, niños y adolescentes interesados en el deporte.",
-    color: "bg-emerald-600",
-    image:
-      "https://images.unsplash.com/photo-1526232761682-d26e03ac148e?auto=format&fit=crop&w=900&q=80",
-  },
-  {
-    fecha: "30 ABR",
-    title: "Operativo Municipal en Terreno",
-    tag: "Comunidad",
-    lugar: "Sector Las Cruces",
-    text: "Atención de servicios municipales, orientación social y apoyo comunitario en terreno.",
-    color: "bg-yellow-600",
-    image:
-      "https://images.unsplash.com/photo-1556761175-b413da4baf72?auto=format&fit=crop&w=900&q=80",
-  },
-];
+import {
+  categoriasEventos,
+  eventos,
+  type CategoriaEvento,
+} from "@/lib/events-data";
 
 export default function EventosPage() {
   const [categoriaActiva, setCategoriaActiva] =
@@ -293,12 +164,12 @@ export default function EventosPage() {
                   </p>
 
                   <div className="mt-6">
-                    <button
+                    <Link
+                      href={`/eventos/${e.slug}`}
                       className={`rounded-full ${e.color} px-6 py-3 text-sm font-black text-white shadow-md`}
-                      type="button"
                     >
                       Ver más →
-                    </button>
+                    </Link>
                   </div>
                 </div>
               </article>

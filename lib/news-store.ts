@@ -1,9 +1,11 @@
 import { promises as fs } from "fs";
 import path from "path";
+import migratedNews from "../data/noticias.json";
 import { initialNoticias, type Noticia } from "./news-data";
 
 const dataDir = path.join(process.cwd(), "data");
 const newsFile = path.join(dataDir, "noticias.json");
+const migratedNoticias = migratedNews as Noticia[];
 
 type CreateNoticiaInput = Omit<Noticia, "id" | "slug" | "author"> & {
   author?: string;
@@ -26,7 +28,7 @@ async function ensureNewsFile() {
   try {
     await fs.access(newsFile);
   } catch {
-    await fs.writeFile(newsFile, JSON.stringify(initialNoticias, null, 2), "utf8");
+    await fs.writeFile(newsFile, JSON.stringify(migratedNoticias, null, 2), "utf8");
   }
 }
 
@@ -41,7 +43,7 @@ export async function getNews() {
         new Date(b.publishedAt).getTime() - new Date(a.publishedAt).getTime()
     );
   } catch {
-    return initialNoticias;
+    return migratedNoticias.length ? migratedNoticias : initialNoticias;
   }
 }
 

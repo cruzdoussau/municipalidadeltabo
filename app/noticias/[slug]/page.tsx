@@ -1,8 +1,25 @@
+import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
 import { getNews, getNewsBySlug } from "@/lib/news-store";
+
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ slug: string }>;
+}): Promise<Metadata> {
+  const { slug } = await params;
+  const noticia = await getNewsBySlug(slug);
+
+  return noticia
+    ? {
+        title: `${noticia.title} | Municipalidad de El Tabo`,
+        description: noticia.excerpt,
+      }
+    : { title: "Noticia no encontrada | Municipalidad de El Tabo" };
+}
 
 export default async function NoticiaDetallePage({
   params,
@@ -80,6 +97,19 @@ export default async function NoticiaDetallePage({
                 </span>
               ))}
             </div>
+
+            {noticia.sourceUrl && (
+              <div className="mt-10 border-t border-slate-200 pt-6">
+                <a
+                  href={noticia.sourceUrl}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="inline-flex rounded-full bg-slate-100 px-6 py-3 text-sm font-black text-[#00174a] ring-1 ring-slate-200"
+                >
+                  Ver publicación original ↗
+                </a>
+              </div>
+            )}
           </article>
 
           <aside className="space-y-5">

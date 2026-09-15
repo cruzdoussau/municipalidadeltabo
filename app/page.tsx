@@ -5,6 +5,7 @@ import Image from "next/image";
 import Link from "next/link";
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
+import { categoriasEventos, eventos } from "@/lib/events-data";
 
 const servicios = [
   {
@@ -55,90 +56,6 @@ const servicios = [
     color: "bg-sky-500",
     href: "/tramites-y-servicios",
   },
-];
-
-const eventos = [
-  {
-    fecha: "12 ABR",
-    title: "Festival Costumbrista de El Tabo",
-    tag: "Cultura",
-    lugar: "Plaza principal · 18:00 hrs",
-    text: "Encuentro familiar con música, gastronomía y emprendedores locales.",
-    color: "bg-blue-600",
-    image:
-      "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=900&q=80",
-  },
-  {
-    fecha: "14 ABR",
-    title: "Corrida Familiar por la Comunidad",
-    tag: "Deporte",
-    lugar: "Costanera El Tabo",
-    text: "Actividad deportiva abierta a vecinas y vecinos de todas las edades.",
-    color: "bg-emerald-600",
-    image:
-      "https://images.unsplash.com/photo-1502904550040-7534597429ae?auto=format&fit=crop&w=900&q=80",
-  },
-  {
-    fecha: "16 ABR",
-    title: "Feria de Servicios Municipales",
-    tag: "Comunidad",
-    lugar: "Frontis Municipal",
-    text: "Actividad comunal de servicios hacia la comunidad en nuestro frontis municipal.",
-    color: "bg-yellow-600",
-    image:
-      "https://images.unsplash.com/photo-1488459716781-31db52582fe9?auto=format&fit=crop&w=900&q=80",
-  },
-  {
-    fecha: "17 ABR",
-    title: "Taller de Manualidades",
-    tag: "Juventud",
-    lugar: "Oficina de la Juventud",
-    text: "Ven a compartir y aprender en nuestro taller de manualidades de juventud.",
-    color: "bg-violet-600",
-    image:
-      "https://images.unsplash.com/photo-1517048676732-d65bc937f952?auto=format&fit=crop&w=900&q=80",
-  },
-  {
-    fecha: "20 ABR",
-    title: "Encuentro de Niñez y Familia",
-    tag: "Niñez",
-    lugar: "Plaza El Tabo",
-    text: "Jornada recreativa con juegos, actividades familiares y espacios de participación.",
-    color: "bg-sky-600",
-    image:
-      "https://images.unsplash.com/photo-1503454537195-1dcabb73ffb9?auto=format&fit=crop&w=900&q=80",
-  },
-  {
-    fecha: "22 ABR",
-    title: "Mateada del Adulto Mayor",
-    tag: "Adulto Mayor",
-    lugar: "Sede comunitaria",
-    text: "Encuentro comunitario para compartir, conversar y fortalecer la vida social.",
-    color: "bg-orange-500",
-    image:
-      "https://images.unsplash.com/photo-1516307365426-bea591f05011?auto=format&fit=crop&w=900&q=80",
-  },
-  {
-    fecha: "25 ABR",
-    title: "Ruta Turística Patrimonial",
-    tag: "Turismo",
-    lugar: "Borde costero",
-    text: "Recorrido guiado por espacios patrimoniales, naturales y culturales de la comuna.",
-    color: "bg-teal-600",
-    image:
-      "https://images.unsplash.com/photo-1500375592092-40eb2168fd21?auto=format&fit=crop&w=900&q=80",
-  },
-];
-
-const categoriasEventos = [
-  { label: "Todos", icon: "" },
-  { label: "Cultura", icon: "📍" },
-  { label: "Deporte", icon: "⚽" },
-  { label: "Comunidad", icon: "👥" },
-  { label: "Juventud", icon: "🎨" },
-  { label: "Niñez", icon: "🧒" },
-  { label: "Adulto Mayor", icon: "♿" },
-  { label: "Turismo", icon: "🌴" },
 ];
 
 const accesos = [
@@ -224,36 +141,42 @@ function AccesosRapidos() {
 const direcciones = [
   {
     title: "Turismo",
+    href: "/dideco/desarrollo-economico-local/oficina-de-turismo",
     image:
       "https://images.unsplash.com/photo-1500375592092-40eb2168fd21?auto=format&fit=crop&w=900&q=80",
     color: "from-blue-900/90",
   },
   {
     title: "Deportes",
+    href: "/dideco/programas-sociales-municipales/programa-de-deportes",
     image:
       "https://images.unsplash.com/photo-1502904550040-7534597429ae?auto=format&fit=crop&w=900&q=80",
     color: "from-emerald-900/90",
   },
   {
     title: "Cultura",
+    href: "/dideco/cultura",
     image:
       "https://images.unsplash.com/photo-1529156069898-49953e39b3ac?auto=format&fit=crop&w=900&q=80",
     color: "from-orange-900/90",
   },
   {
     title: "Mujer",
+    href: "/dideco/equidad-genero/programa-de-la-mujer",
     image:
       "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=900&q=80",
     color: "from-violet-900/90",
   },
   {
     title: "Juventud",
+    href: "/dideco/ninez-y-juventud/programa-de-juventud",
     image:
       "https://images.unsplash.com/photo-1517048676732-d65bc937f952?auto=format&fit=crop&w=900&q=80",
     color: "from-indigo-900/90",
   },
   {
     title: "Adulto Mayor",
+    href: "/dideco/programas-sociales-municipales/programa-del-adulto-mayor",
     image:
       "https://images.unsplash.com/photo-1516307365426-bea591f05011?auto=format&fit=crop&w=900&q=80",
     color: "from-yellow-800/90",
@@ -329,32 +252,34 @@ const videos = [
 
 const noticiasDestacadas = [
   {
-    kicker: "Educación y tecnología",
-    title: "Estudiantes reciben notebooks Beca TIC JUNAEB",
-    text: "Estudiantes de El Tabo recibieron notebooks para apoyar sus procesos de aprendizaje.",
-    cardTitle: "Entrega de notebooks Beca TIC JUNAEB",
+    kicker: "Tradiciones e identidad",
+    title: "El Tabo rindió homenaje a Chile en un nuevo Desfile Comunal de Fiestas Patrias",
+    text: "La comunidad se reunió en Avenida La Playa para rendir homenaje a Chile, sus tradiciones y el patrimonio que forma parte de la identidad tabina.",
+    cardTitle: "Desfile Comunal de Fiestas Patrias",
     color: "text-[#1da7e0]",
     button: "bg-[#1da7e0] text-white",
-    image: "/images/home/noticias/agosto-2026-beca-tic-junaeb.jpg",
+    image: "https://eltabo.cl/wp-content/uploads/2026/09/DSC05350-1024x683.jpg",
+    slug: "el-tabo-rindio-homenaje-a-chile-en-un-nuevo-desfile-comunal-de-fiestas-patrias",
   },
   {
-    kicker: "Infancia y familia",
-    title: "Celebremos a la Niñez en Familia",
-    text: "La Municipalidad invita a niñas, niños y familias a reunirse en el frontis municipal para disfrutar música en vivo, concursos, Zumba Kids, pinta caritas y entrega de colaciones.",
-    cardTitle: "Celebra la Niñez en Familia",
+    kicker: "Bienestar y comunidad",
+    title: "36 familias de El Tabo recibieron títulos de dominio tras años de espera",
+    text: "La entrega acredita legalmente a las familias como propietarias de sus viviendas y terrenos, cerrando procesos que en algunos casos se extendieron por más de 20 años.",
+    cardTitle: "Entrega de títulos de dominio",
     color: "text-[#f6c400]",
     button: "bg-[#f6c400] text-[#061f5c]",
-    image: "/images/home/noticias/agosto-2026-celebra-la-ninez-en-familia.jpg",
+    image: "https://eltabo.cl/wp-content/uploads/2026/09/WhatsApp-Image-2026-09-07-at-3.33.07-PM-1-1024x682.jpeg",
+    slug: "36-familias-de-el-tabo-recibieron-titulos-de-dominio-de-sus-propiedades-tras-anos-de-espera",
   },
   {
-    kicker: "Tradición y cultura",
-    title: "La cueca se vive con orgullo en El Tabo",
-    text: "El Campeonato Comunal de Cueca Adulto Mayor 2026 invita a la comunidad a apoyar a las parejas que buscarán representar a El Tabo en el Campeonato Nacional de Cueca Adulto Mayor de Tomé.",
-    cardTitle: "Campeonato Comunal de Cueca Adulto Mayor 2026",
+    kicker: "Participación ciudadana",
+    title: "El Tabo celebra a sus dirigentes sociales mirando al futuro",
+    text: "Más de 300 dirigentes y dirigentas participaron en una jornada de encuentro, reflexión y sueños compartidos para las futuras generaciones de la comuna.",
+    cardTitle: "Día del Dirigente Social y Comunitario",
     color: "text-[#e30613]",
     button: "bg-[#e30613] text-white",
-    image:
-      "/images/home/noticias/764340089_18102853769180359_8041568145544355602_n.jpg",
+    image: "https://eltabo.cl/wp-content/uploads/2026/09/DSC04578-1024x683.jpg",
+    slug: "el-tabo-celebra-a-sus-dirigentes-sociales-mirando-al-futuro",
   },
 ];
 const heroImages = [
@@ -526,7 +451,7 @@ function NoticiasSlider() {
 
             <div className="mt-6 flex flex-wrap items-center gap-3">
               <Link
-                href="/noticias"
+                href={`/noticias/${noticia.slug}`}
                 className={`rounded-md px-6 py-3 text-sm font-black shadow-sm ${noticia.button}`}
               >
                 Leer Noticia
@@ -704,12 +629,12 @@ function CarteleraEventos() {
         </p>
 
         <div className="mt-auto pt-5">
-          <button
+          <Link
+            href={`/eventos/${e.slug}`}
             className={`w-full rounded-full ${e.color} px-6 py-3 text-sm font-black text-white shadow-md transition hover:brightness-95`}
-            type="button"
           >
             Ver más →
-          </button>
+          </Link>
         </div>
       </div>
     </article>
@@ -741,9 +666,10 @@ function DireccionesMunicipales() {
 
       <div className="mt-8 grid gap-5 sm:grid-cols-2 md:grid-cols-3">
         {direcciones.map((item) => (
-          <article
+          <Link
             key={item.title}
-            className="relative h-56 overflow-hidden rounded-2xl shadow-lg ring-1 ring-blue-100"
+            href={item.href}
+            className="group relative h-56 overflow-hidden rounded-2xl shadow-lg ring-1 ring-blue-100 transition hover:-translate-y-1 hover:shadow-xl"
           >
             <img
               className="absolute inset-0 h-full w-full object-cover"
@@ -760,11 +686,11 @@ function DireccionesMunicipales() {
                 {item.title}
               </h3>
 
-              <button className="mt-3 rounded-full bg-blue-700 px-5 py-2 text-sm font-black text-white shadow-lg">
+              <span className="mt-3 inline-flex rounded-full bg-blue-700 px-5 py-2 text-sm font-black text-white shadow-lg transition group-hover:bg-blue-800">
                 Explorar →
-              </button>
+              </span>
             </div>
-          </article>
+          </Link>
         ))}
       </div>
     </section>
