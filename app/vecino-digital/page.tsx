@@ -67,18 +67,19 @@ function PCirculacionModal({ onClose }: ModalProps) {
 
   return (
     <div className="fixed inset-0 z-[100] flex items-center justify-center bg-slate-950/70 p-4 backdrop-blur-sm">
-      <div className="relative max-h-[92vh] w-full max-w-6xl overflow-hidden rounded-[28px] bg-white shadow-2xl ring-1 ring-white/20">
+      <div role="dialog" aria-modal="true" aria-labelledby="titulo-permiso-circulacion" className="relative max-h-[92vh] w-full max-w-6xl overflow-hidden rounded-[28px] bg-white shadow-2xl ring-1 ring-white/20">
         <div className="flex items-center justify-between border-b border-slate-200 bg-[#f8fbff] px-6 py-4">
           <div>
             <p className="text-xs font-black uppercase tracking-wide text-blue-700">
               Vecino Digital
             </p>
-            <h2 className="text-2xl font-black text-[#061f5c]">
+            <h2 id="titulo-permiso-circulacion" className="text-2xl font-black text-[#061f5c]">
               Permiso de Circulación
             </h2>
           </div>
 
           <button
+            autoFocus
             onClick={onClose}
             className="grid h-11 w-11 place-items-center rounded-full bg-white text-2xl font-black text-slate-600 shadow ring-1 ring-slate-200 transition hover:bg-slate-100"
             type="button"
@@ -167,27 +168,29 @@ function PCirculacionModal({ onClose }: ModalProps) {
                           Detalle:
                         </h5>
 
-                        <p className="mt-3 text-xl font-bold leading-relaxed text-blue-500/80">
+                        <p className="mt-3 text-xl font-bold leading-relaxed text-blue-800">
                           Servicio de pago Patente Vehicular, incluye Multas,
                           Permiso de Circulación y SOAP.
                         </p>
 
-                        <p className="mt-8 font-semibold text-blue-500/80">
+                        <p className="mt-8 font-semibold text-blue-800">
                           En caso de algún problema con su vehículo puede
                           validar presionando el botón VERIFICAR PLACA.
                         </p>
 
-                        <p className="mt-8 text-xl uppercase text-blue-500/80">
+                        <p className="mt-8 text-xl uppercase text-blue-800">
                           Ingrese RUT/RUN y patente asociada vehículo sin guión:
                         </p>
 
                         <div className="mt-6 grid gap-4 md:grid-cols-[1fr_1fr_1fr]">
                           <input
+                            aria-label="Ejemplo de RUT o RUN"
                             className="rounded border border-slate-300 px-4 py-3 text-slate-500"
                             value="EJEMPLO RUT/RUN: 12345678"
                             readOnly
                           />
                           <input
+                            aria-label="Ejemplo de placa patente"
                             className="rounded border border-slate-300 px-4 py-3 text-slate-500"
                             value="EJEMPLO PLACA: AAAA12"
                             readOnly
@@ -320,11 +323,13 @@ function PCirculacionModal({ onClose }: ModalProps) {
 
                         <div className="mt-5 grid gap-4 md:grid-cols-[1fr_1fr_150px]">
                           <input
+                            aria-label="Ejemplo de RUT o RUN para verificar placa"
                             className="rounded border border-slate-300 px-4 py-3 text-slate-600"
                             value="19757100-4"
                             readOnly
                           />
                           <input
+                            aria-label="Ejemplo de placa patente para verificar"
                             className="rounded border border-slate-300 px-4 py-3 text-slate-600"
                             value="UW1742"
                             readOnly
@@ -363,18 +368,19 @@ function PCirculacionModal({ onClose }: ModalProps) {
 function PatenteMunicipalModal({ onClose }: ModalProps) {
   return (
     <div className="fixed inset-0 z-[100] flex items-center justify-center bg-slate-950/70 p-4 backdrop-blur-sm">
-      <div className="relative max-h-[92vh] w-full max-w-5xl overflow-hidden rounded-[28px] bg-white shadow-2xl ring-1 ring-white/20">
+      <div role="dialog" aria-modal="true" aria-labelledby="titulo-patente-municipal" className="relative max-h-[92vh] w-full max-w-5xl overflow-hidden rounded-[28px] bg-white shadow-2xl ring-1 ring-white/20">
         <div className="flex items-center justify-between border-b border-slate-200 bg-[#f8fbff] px-6 py-4">
           <div>
             <p className="text-xs font-black uppercase tracking-wide text-blue-700">
               Vecino Digital
             </p>
-            <h2 className="text-2xl font-black text-[#061f5c]">
+            <h2 id="titulo-patente-municipal" className="text-2xl font-black text-[#061f5c]">
               Patente Municipal / Comercial
             </h2>
           </div>
 
           <button
+            autoFocus
             onClick={onClose}
             className="grid h-11 w-11 place-items-center rounded-full bg-white text-2xl font-black text-slate-600 shadow ring-1 ring-slate-200 transition hover:bg-slate-100"
             type="button"
@@ -445,17 +451,19 @@ function PatenteMunicipalModal({ onClose }: ModalProps) {
                     BUSCAR PATENTE MUNICIPAL
                   </span>
 
-                  <p className="mt-8 text-center text-xl font-medium uppercase text-blue-500/80">
+                  <p className="mt-8 text-center text-xl font-medium uppercase text-blue-800">
                     Ingrese RUT/RUN y N° de rol municipal:
                   </p>
 
                   <div className="mx-auto mt-8 grid max-w-3xl gap-5 md:grid-cols-[1fr_1fr_140px]">
                     <input
+                      aria-label="Ejemplo de RUT o RUN"
                       className="rounded border border-slate-300 px-4 py-3 text-slate-500"
                       value="Ejemplo RUT/RUN: 12345678"
                       readOnly
                     />
                     <input
+                      aria-label="Ejemplo de rol municipal"
                       className="rounded border border-slate-300 px-4 py-3 text-slate-500"
                       value="Ejemplo ROL: 123456"
                       readOnly
@@ -480,18 +488,19 @@ function PatenteMunicipalModal({ onClose }: ModalProps) {
 function DerechosAseoModal({ onClose }: ModalProps) {
   return (
     <div className="fixed inset-0 z-[100] flex items-center justify-center bg-slate-950/70 p-4 backdrop-blur-sm">
-      <div className="relative max-h-[92vh] w-full max-w-5xl overflow-hidden rounded-[28px] bg-white shadow-2xl ring-1 ring-white/20">
+      <div role="dialog" aria-modal="true" aria-labelledby="titulo-derechos-aseo" className="relative max-h-[92vh] w-full max-w-5xl overflow-hidden rounded-[28px] bg-white shadow-2xl ring-1 ring-white/20">
         <div className="flex items-center justify-between border-b border-slate-200 bg-[#f8fbff] px-6 py-4">
           <div>
             <p className="text-xs font-black uppercase tracking-wide text-blue-700">
               Vecino Digital
             </p>
-            <h2 className="text-2xl font-black text-[#061f5c]">
+            <h2 id="titulo-derechos-aseo" className="text-2xl font-black text-[#061f5c]">
               Derechos de Aseo
             </h2>
           </div>
 
           <button
+            autoFocus
             onClick={onClose}
             className="grid h-11 w-11 place-items-center rounded-full bg-white text-2xl font-black text-slate-600 shadow ring-1 ring-slate-200 transition hover:bg-slate-100"
             type="button"
@@ -609,18 +618,19 @@ function DerechosAseoModal({ onClose }: ModalProps) {
 function InfraccionModal({ onClose }: ModalProps) {
   return (
     <div className="fixed inset-0 z-[100] flex items-center justify-center bg-slate-950/70 p-4 backdrop-blur-sm">
-      <div className="relative max-h-[92vh] w-full max-w-5xl overflow-hidden rounded-[28px] bg-white shadow-2xl ring-1 ring-white/20">
+      <div role="dialog" aria-modal="true" aria-labelledby="titulo-infraccion" className="relative max-h-[92vh] w-full max-w-5xl overflow-hidden rounded-[28px] bg-white shadow-2xl ring-1 ring-white/20">
         <div className="flex items-center justify-between border-b border-slate-200 bg-[#f8fbff] px-6 py-4">
           <div>
             <p className="text-xs font-black uppercase tracking-wide text-blue-700">
               Vecino Digital
             </p>
-            <h2 className="text-2xl font-black text-[#061f5c]">
+            <h2 id="titulo-infraccion" className="text-2xl font-black text-[#061f5c]">
               Infracción / Multas de Tránsito
             </h2>
           </div>
 
           <button
+            autoFocus
             onClick={onClose}
             className="grid h-11 w-11 place-items-center rounded-full bg-white text-2xl font-black text-slate-600 shadow ring-1 ring-slate-200 transition hover:bg-slate-100"
             type="button"
@@ -677,23 +687,25 @@ function InfraccionModal({ onClose }: ModalProps) {
                       MULTAS DE TRÁNSITO
                     </span>
 
-                    <p className="mt-6 text-lg leading-relaxed text-blue-500/80">
+                    <p className="mt-6 text-lg leading-relaxed text-blue-800">
                       <strong className="underline">Detalle:</strong>
                       <br />
                       Servicio de pago de multas de tránsito.
                     </p>
 
-                    <p className="mt-8 text-xl uppercase text-blue-500/80">
+                    <p className="mt-8 text-xl uppercase text-blue-800">
                       Ingrese RUT/RUN y patente asociada vehículo sin guión:
                     </p>
 
                     <div className="mt-6 flex max-w-md flex-col gap-0">
                       <input
+                        aria-label="Ejemplo de RUT o RUN para consultar infracción"
                         className="rounded-t border border-slate-300 px-4 py-4 text-slate-500"
                         value="EJEMPLO RUT/RUN: 12345"
                         readOnly
                       />
                       <input
+                        aria-label="Ejemplo de placa patente para consultar infracción"
                         className="rounded-b border border-slate-300 px-4 py-4 text-slate-500"
                         value="EJEMPLO PLACA: AAAA12"
                         readOnly
@@ -720,18 +732,19 @@ function InfraccionModal({ onClose }: ModalProps) {
 function TagModal({ onClose }: ModalProps) {
   return (
     <div className="fixed inset-0 z-[100] flex items-center justify-center bg-slate-950/70 p-4 backdrop-blur-sm">
-      <div className="relative max-h-[92vh] w-full max-w-5xl overflow-hidden rounded-[28px] bg-white shadow-2xl ring-1 ring-white/20">
+      <div role="dialog" aria-modal="true" aria-labelledby="titulo-tag" className="relative max-h-[92vh] w-full max-w-5xl overflow-hidden rounded-[28px] bg-white shadow-2xl ring-1 ring-white/20">
         <div className="flex items-center justify-between border-b border-slate-200 bg-[#f8fbff] px-6 py-4">
           <div>
             <p className="text-xs font-black uppercase tracking-wide text-blue-700">
               Vecino Digital
             </p>
-            <h2 className="text-2xl font-black text-[#061f5c]">
+            <h2 id="titulo-tag" className="text-2xl font-black text-[#061f5c]">
               TAG / Multas asociadas
             </h2>
           </div>
 
           <button
+            autoFocus
             onClick={onClose}
             className="grid h-11 w-11 place-items-center rounded-full bg-white text-2xl font-black text-slate-600 shadow ring-1 ring-slate-200 transition hover:bg-slate-100"
             type="button"
@@ -789,19 +802,20 @@ function TagModal({ onClose }: ModalProps) {
                       CONSULTA MULTAS TAG
                     </span>
 
-                    <p className="mt-6 text-lg leading-relaxed text-blue-500/80">
+                    <p className="mt-6 text-lg leading-relaxed text-blue-800">
                       <strong className="underline">Detalle:</strong>
                       <br />
                       Servicio de consulta automática de multas TAG asociadas a
                       la placa patente.
                     </p>
 
-                    <p className="mt-8 text-xl uppercase text-blue-500/80">
+                    <p className="mt-8 text-xl uppercase text-blue-800">
                       Ingrese número de placa patente:
                     </p>
 
                     <div className="mt-6 grid max-w-xl gap-4 md:grid-cols-[1fr_160px]">
                       <input
+                        aria-label="Ejemplo de placa patente para consultar multas TAG"
                         className="rounded border border-slate-300 px-4 py-4 text-slate-500"
                         value="EJEMPLO PLACA: AAAA12"
                         readOnly
@@ -834,18 +848,19 @@ function MultasVariosModal({ onClose }: ModalProps) {
 
   return (
     <div className="fixed inset-0 z-[100] flex items-center justify-center bg-slate-950/70 p-4 backdrop-blur-sm">
-      <div className="relative max-h-[92vh] w-full max-w-5xl overflow-hidden rounded-[28px] bg-white shadow-2xl ring-1 ring-white/20">
+      <div role="dialog" aria-modal="true" aria-labelledby="titulo-multas-varios" className="relative max-h-[92vh] w-full max-w-5xl overflow-hidden rounded-[28px] bg-white shadow-2xl ring-1 ring-white/20">
         <div className="flex items-center justify-between border-b border-slate-200 bg-[#f8fbff] px-6 py-4">
           <div>
             <p className="text-xs font-black uppercase tracking-wide text-blue-700">
               Vecino Digital
             </p>
-            <h2 className="text-2xl font-black text-[#061f5c]">
+            <h2 id="titulo-multas-varios" className="text-2xl font-black text-[#061f5c]">
               Multas P.Varios / Pagos Varios
             </h2>
           </div>
 
           <button
+            autoFocus
             onClick={onClose}
             className="grid h-11 w-11 place-items-center rounded-full bg-white text-2xl font-black text-slate-600 shadow ring-1 ring-slate-200 transition hover:bg-slate-100"
             type="button"
@@ -902,15 +917,15 @@ function MultasVariosModal({ onClose }: ModalProps) {
                     PAGOS VARIOS
                   </span>
 
-                  <h5 className="mt-8 text-3xl font-light text-blue-500/80">
+                  <h3 className="mt-8 text-3xl font-semibold text-blue-800">
                     Seleccione un método de búsqueda:
-                  </h5>
+                  </h3>
 
                   <div className="mt-8 grid gap-4 md:grid-cols-4">
                     {metodos.map((metodo, index) => (
                       <label
                         key={metodo}
-                        className="flex cursor-pointer items-center justify-center gap-3 rounded-2xl bg-blue-50 p-4 text-center text-xl font-medium text-blue-500/90 ring-1 ring-blue-100"
+                        className="flex cursor-pointer items-center justify-center gap-3 rounded-2xl bg-blue-50 p-4 text-center text-xl font-semibold text-blue-800 ring-1 ring-blue-100"
                       >
                         <input
                           type="radio"
@@ -923,16 +938,17 @@ function MultasVariosModal({ onClose }: ModalProps) {
                     ))}
                   </div>
 
-                  <p className="mt-8 text-base font-black uppercase text-blue-500/80">
+                  <p className="mt-8 text-base font-black uppercase text-blue-800">
                     El formato del RUT debe ser sin puntos ni guion
                   </p>
 
-                  <p className="mt-2 text-xl font-black text-blue-500/80">
+                  <p className="mt-2 text-xl font-black text-blue-800">
                     Ej: 123456781
                   </p>
 
                   <div className="mx-auto mt-8 grid max-w-3xl gap-5 md:grid-cols-[1fr_180px]">
                     <input
+                      aria-label="Dato de búsqueda para pagos varios"
                       className="rounded border border-slate-300 px-4 py-4 text-slate-500"
                       placeholder="Ingrese dato de búsqueda"
                     />
@@ -956,6 +972,54 @@ function MultasVariosModal({ onClose }: ModalProps) {
 export default function VecinoDigitalPage() {
   const [activeModal, setActiveModal] = React.useState<ModalType>(null);
   const serviciosRef = React.useRef<HTMLElement | null>(null);
+  const lastTriggerRef = React.useRef<HTMLElement | null>(null);
+
+  const openModal = (modal: ModalType) => {
+    lastTriggerRef.current = document.activeElement as HTMLElement;
+    setActiveModal(modal);
+  };
+
+  const closeModal = React.useCallback(() => {
+    setActiveModal(null);
+    window.requestAnimationFrame(() => lastTriggerRef.current?.focus());
+  }, []);
+
+  React.useEffect(() => {
+    if (!activeModal) return;
+
+    const handleDialogKeys = (event: KeyboardEvent) => {
+      if (event.key === "Escape") {
+        closeModal();
+        return;
+      }
+
+      if (event.key !== "Tab") return;
+      const dialog = document.querySelector<HTMLElement>('[role="dialog"]');
+      const focusable = dialog?.querySelectorAll<HTMLElement>(
+        'a[href], button:not([disabled]), input:not([disabled]), select:not([disabled]), textarea:not([disabled]), [tabindex]:not([tabindex="-1"])'
+      );
+      if (!focusable?.length) return;
+
+      const first = focusable[0];
+      const last = focusable[focusable.length - 1];
+      if (event.shiftKey && document.activeElement === first) {
+        event.preventDefault();
+        last.focus();
+      } else if (!event.shiftKey && document.activeElement === last) {
+        event.preventDefault();
+        first.focus();
+      }
+    };
+
+    const previousOverflow = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    document.addEventListener("keydown", handleDialogKeys);
+
+    return () => {
+      document.body.style.overflow = previousOverflow;
+      document.removeEventListener("keydown", handleDialogKeys);
+    };
+  }, [activeModal, closeModal]);
 
   const scrollToServicios = () => {
     serviciosRef.current?.scrollIntoView({
@@ -968,7 +1032,7 @@ export default function VecinoDigitalPage() {
     <>
       <Header />
 
-      <main className="bg-white text-slate-900">
+      <main id="contenido-principal" tabIndex={-1} className="bg-white text-slate-900">
         <section className="relative overflow-hidden bg-[#002d7a] py-16 text-white">
           <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=1800&q=80')] bg-cover bg-center opacity-30" />
           <div className="absolute inset-0 bg-gradient-to-r from-[#00174a] via-[#002d7a]/90 to-[#0055c7]/40" />
@@ -1057,11 +1121,11 @@ export default function VecinoDigitalPage() {
               {tramites.map((item) => (
                 <button
                   key={item.title}
-                  onClick={() => setActiveModal(item.modal)}
+                  onClick={() => openModal(item.modal)}
                   className="group flex min-h-[150px] flex-col items-center justify-center p-5 text-center transition hover:bg-blue-50"
                   type="button"
                 >
-                  <div className="text-5xl text-blue-700 transition group-hover:-translate-y-1">
+                  <div aria-hidden="true" className="text-5xl text-blue-700 transition group-hover:-translate-y-1">
                     {item.icon}
                   </div>
 
@@ -1079,27 +1143,27 @@ export default function VecinoDigitalPage() {
         </section>
 
         {activeModal === "p-circulacion" && (
-          <PCirculacionModal onClose={() => setActiveModal(null)} />
+          <PCirculacionModal onClose={closeModal} />
         )}
 
         {activeModal === "p-municipal" && (
-          <PatenteMunicipalModal onClose={() => setActiveModal(null)} />
+          <PatenteMunicipalModal onClose={closeModal} />
         )}
 
         {activeModal === "d-aseo" && (
-          <DerechosAseoModal onClose={() => setActiveModal(null)} />
+          <DerechosAseoModal onClose={closeModal} />
         )}
 
         {activeModal === "infraccion" && (
-          <InfraccionModal onClose={() => setActiveModal(null)} />
+          <InfraccionModal onClose={closeModal} />
         )}
 
         {activeModal === "tag" && (
-          <TagModal onClose={() => setActiveModal(null)} />
+          <TagModal onClose={closeModal} />
         )}
 
         {activeModal === "multas-varios" && (
-          <MultasVariosModal onClose={() => setActiveModal(null)} />
+          <MultasVariosModal onClose={closeModal} />
         )}
 
         <section className="bg-slate-50 py-14">

@@ -114,7 +114,7 @@ function AccesosRapidos() {
               <div className="mx-auto flex h-24 w-24 items-center justify-center rounded-full bg-[#dfeafb]">
                 <Image
                   src={a.icono}
-                  alt={a.titulo}
+                  alt=""
                   width={150}
                   height={150}
                   className="h-[150px] w-[150px] object-contain"
@@ -291,14 +291,19 @@ const heroImages = [
 ];
 function Hero() {
   const [activeImage, setActiveImage] = React.useState(0);
+  const [isPlaying, setIsPlaying] = React.useState(true);
 
   React.useEffect(() => {
+    if (!isPlaying || window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      return;
+    }
+
     const interval = setInterval(() => {
       setActiveImage((current) => (current + 1) % heroImages.length);
     }, 5500);
 
     return () => clearInterval(interval);
-  }, []);
+  }, [isPlaying]);
 
   return (
     <section id="inicio" className="relative overflow-hidden bg-[#002d7a]">
@@ -307,6 +312,7 @@ function Hero() {
         {heroImages.map((image, index) => (
           <div
             key={image}
+            aria-hidden="true"
             className={`absolute inset-0 bg-cover bg-center transition-opacity duration-[1800ms] ease-in-out ${
               activeImage === index ? "opacity-60" : "opacity-0"
             }`}
@@ -346,13 +352,13 @@ function Hero() {
               key={s.title}
               className="rounded-2xl bg-white p-5 text-center shadow-xl ring-1 ring-blue-100 transition hover:-translate-y-1 hover:shadow-2xl"
             >
-              <div className="mx-auto grid h-16 w-16 place-items-center rounded-full bg-blue-50 text-3xl">
+              <div aria-hidden="true" className="mx-auto grid h-16 w-16 place-items-center rounded-full bg-blue-50 text-3xl">
                 {s.icon}
               </div>
 
-              <h3 className="mt-4 min-h-12 text-base font-black text-[#061f5c]">
+              <h2 className="mt-4 min-h-12 text-base font-black text-[#061f5c]">
                 {s.title}
-              </h3>
+              </h2>
 
               <p className="min-h-20 text-xs leading-relaxed text-[#17356f]">
                 {s.text}
@@ -369,7 +375,7 @@ function Hero() {
         </div>
 
         {/* Indicadores */}
-        <div className="mt-8 flex justify-center gap-2">
+        <div className="mt-8 flex flex-wrap justify-center gap-2" aria-label="Controles del carrusel principal">
           {heroImages.map((image, index) => (
             <button
               key={image}
@@ -380,9 +386,18 @@ function Hero() {
                   : "w-2.5 bg-white/40 hover:bg-white/70"
               }`}
               aria-label={`Ver imagen ${index + 1}`}
+              aria-pressed={activeImage === index}
               type="button"
             />
           ))}
+          <button
+            type="button"
+            onClick={() => setIsPlaying((playing) => !playing)}
+            className="ml-2 rounded-full bg-white px-4 py-2 text-sm font-black text-[#061f5c]"
+            aria-pressed={!isPlaying}
+          >
+            {isPlaying ? "Pausar animación" : "Reanudar animación"}
+          </button>
         </div>
       </div>
     </section>
@@ -433,6 +448,9 @@ function NoticiasSlider() {
            </Link>
         </div>
 
+        <p className="sr-only" role="status" aria-live="polite">
+          Noticia destacada {active + 1} de {noticiasDestacadas.length}: {noticia.title}
+        </p>
         <div className="grid items-center gap-6 rounded-2xl bg-white/90 p-5 shadow-sm ring-1 ring-slate-100 lg:grid-cols-[0.95fr_1.05fr] lg:p-7">
           <div>
             <p
@@ -487,6 +505,7 @@ function NoticiasSlider() {
                       : "w-2.5 bg-slate-300"
                   }`}
                   aria-label={`Ver noticia ${index + 1}`}
+                  aria-pressed={active === index}
                   type="button"
                 />
               ))}
@@ -582,7 +601,7 @@ function CarteleraEventos() {
                 aria-pressed={isActive}
                 type="button"
               >
-                {categoria.icon && <span>{categoria.icon}</span>}
+                {categoria.icon && <span aria-hidden="true">{categoria.icon}</span>}
                 {categoria.label}
               </button>
             );
@@ -621,7 +640,7 @@ function CarteleraEventos() {
         </h3>
 
         <p className="mt-4 line-clamp-1 text-sm font-bold text-[#17356f]">
-          📍 {e.lugar}
+          <span aria-hidden="true">📍</span> {e.lugar}
         </p>
 
         <p className="mt-4 line-clamp-3 text-[15px] leading-relaxed text-slate-600">
@@ -674,7 +693,7 @@ function DireccionesMunicipales() {
             <img
               className="absolute inset-0 h-full w-full object-cover"
               src={item.image}
-              alt={item.title}
+              alt=""
             />
 
             <div
@@ -714,7 +733,7 @@ function VideosElTabo() {
         <div className="flex flex-wrap items-end justify-between gap-4">
           <div>
             <div className="flex items-center gap-3">
-              <span className="grid h-11 w-11 place-items-center rounded-full border-4 border-blue-700 text-xl text-blue-700">
+              <span aria-hidden="true" className="grid h-11 w-11 place-items-center rounded-full border-4 border-blue-700 text-xl text-blue-700">
                 ▶
               </span>
 
@@ -729,14 +748,20 @@ function VideosElTabo() {
             </p>
           </div>
 
-          <button className="rounded-full bg-blue-700 px-7 py-3 font-black text-white shadow-lg">
+          <a
+            href="https://www.youtube.com/@munieltabo"
+            target="_blank"
+            rel="noreferrer"
+            className="rounded-full bg-blue-700 px-7 py-3 font-black text-white shadow-lg"
+            aria-label="Ir al canal oficial de YouTube (se abre en una nueva pestaña)"
+          >
             ▶ Ir a nuestro canal de YouTube →
-          </button>
+          </a>
         </div>
 
         <div className="mt-8 flex flex-wrap gap-3">
           {categorias.map((categoria, index) => (
-            <button
+            <span
               key={categoria}
               className={`rounded-full px-6 py-3 font-semibold ${
                 index === 0
@@ -745,7 +770,7 @@ function VideosElTabo() {
               }`}
             >
               {categoria}
-            </button>
+            </span>
           ))}
         </div>
 
@@ -759,11 +784,11 @@ function VideosElTabo() {
                 <img
                   className="h-full w-full object-cover"
                   src={video.image}
-                  alt={video.title}
+                  alt=""
                 />
 
                 <div className="absolute inset-0 grid place-items-center">
-                  <span className="grid h-14 w-20 place-items-center rounded-2xl bg-red-600 text-2xl text-white shadow-lg">
+                  <span aria-hidden="true" className="grid h-14 w-20 place-items-center rounded-2xl bg-red-600 text-2xl text-white shadow-lg">
                     ▶
                   </span>
                 </div>
@@ -779,7 +804,7 @@ function VideosElTabo() {
                 </h3>
 
                 <div className="mt-3 flex items-center justify-between gap-2 text-xs text-slate-500">
-                  <span>👁 {video.views}</span>
+                  <span><span aria-hidden="true">👁</span> {video.views}</span>
 
                   <span className="rounded-full bg-blue-50 px-3 py-1 font-bold text-blue-700">
                     {video.tag}
@@ -792,9 +817,15 @@ function VideosElTabo() {
 
         <div className="mt-8 rounded-full bg-white px-6 py-4 text-center font-black text-[#061f5c] shadow-sm ring-1 ring-blue-50">
           Descubre más contenido en nuestro canal oficial{" "}
-          <button className="ml-4 rounded-full bg-blue-700 px-6 py-3 text-white">
+          <a
+            href="https://www.youtube.com/@munieltabo"
+            target="_blank"
+            rel="noreferrer"
+            className="ml-4 inline-flex rounded-full bg-blue-700 px-6 py-3 text-white"
+            aria-label="Ver más en YouTube (se abre en una nueva pestaña)"
+          >
             Ver más en YouTube →
-          </button>
+          </a>
         </div>
       </div>
     </section>
@@ -803,15 +834,17 @@ function VideosElTabo() {
 
 export default function HomePage() {
   return (
-    <main className="min-h-screen bg-white text-slate-900">
+    <>
       <Header />
-      <Hero />
-      <NoticiasSlider />
-      <CarteleraEventos />
-      <AccesosRapidos />
-      <DireccionesMunicipales />
-      <VideosElTabo />
+      <main id="contenido-principal" tabIndex={-1} className="min-h-screen bg-white text-slate-900">
+        <Hero />
+        <NoticiasSlider />
+        <CarteleraEventos />
+        <AccesosRapidos />
+        <DireccionesMunicipales />
+        <VideosElTabo />
+      </main>
       <Footer />
-    </main>
+    </>
   );
 }

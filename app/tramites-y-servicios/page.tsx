@@ -751,7 +751,7 @@ export default function TramitesServiciosPage() {
     <>
       <Header />
 
-      <main className="min-h-screen bg-[#f4f8fc] text-slate-800">
+      <main id="contenido-principal" tabIndex={-1} className="min-h-screen bg-[#f4f8fc] text-slate-800">
         <section className="relative overflow-hidden bg-gradient-to-br from-[#00174a] via-[#0b4ca8] to-[#00a6d6] text-white">
           <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1494526585095-c41746248156?auto=format&fit=crop&w=1800&q=80')] bg-cover bg-center opacity-20" />
           <div className="absolute inset-0 bg-gradient-to-r from-[#00174a]/95 via-[#0b4ca8]/85 to-[#00174a]/55" />
@@ -849,12 +849,17 @@ export default function TramitesServiciosPage() {
                 </h2>
               </div>
 
-              <input
-                value={query}
-                onChange={(event) => setQuery(event.target.value)}
-                placeholder="Buscar trámite, unidad o palabra clave..."
-                className="h-14 rounded-2xl border border-slate-200 bg-slate-50 px-5 text-sm outline-none ring-blue-200 transition focus:ring-4"
-              />
+              <div>
+                <label htmlFor="buscar-tramites" className="sr-only">Buscar trámites y servicios</label>
+                <input
+                  id="buscar-tramites"
+                  type="search"
+                  value={query}
+                  onChange={(event) => setQuery(event.target.value)}
+                  placeholder="Buscar trámite, unidad o palabra clave..."
+                  className="h-14 w-full rounded-2xl border border-slate-200 bg-slate-50 px-5 text-sm outline-none ring-blue-200 transition focus:ring-4"
+                />
+              </div>
             </div>
 
             <div className="mt-6 flex flex-wrap gap-3">
@@ -870,9 +875,11 @@ export default function TramitesServiciosPage() {
                         ? "bg-blue-700 text-white shadow"
                         : "bg-slate-50 text-[#17356f] hover:bg-blue-50"
                     }`}
+                    aria-pressed={active}
+                    aria-controls="resultados-tramites"
                     type="button"
                   >
-                    <span>{item.icon}</span>
+                    <span aria-hidden="true">{item.icon}</span>
                     {item.label}
                   </button>
                 );
@@ -880,7 +887,11 @@ export default function TramitesServiciosPage() {
             </div>
           </div>
 
-          <div className="mt-8 grid gap-5 md:grid-cols-2 lg:grid-cols-3">
+          <p className="mt-6 text-sm font-semibold text-slate-700" role="status" aria-live="polite">
+            {filtrados.length} {filtrados.length === 1 ? "resultado encontrado" : "resultados encontrados"}.
+          </p>
+
+          <div id="resultados-tramites" className="mt-8 grid gap-5 md:grid-cols-2 lg:grid-cols-3">
             {filtrados.map((item, index) => (
               <article
                 key={`${item.category}-${item.unit}-${item.title}-${
@@ -948,6 +959,7 @@ export default function TramitesServiciosPage() {
                       href={item.action.href}
                       target="_blank"
                       rel="noreferrer"
+                      aria-label={`${item.action.label} (se abre en una nueva pestaña)`}
                       className="mt-6 block rounded-full bg-blue-700 px-5 py-3 text-center text-sm font-black text-white"
                     >
                       {item.action.label} →

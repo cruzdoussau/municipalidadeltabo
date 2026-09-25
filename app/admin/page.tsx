@@ -30,7 +30,7 @@ export default async function AdminPage() {
   return (
     <>
       <Header />
-      <main className="min-h-screen bg-[#f4f8fc] px-6 py-14 text-slate-800">
+      <main id="contenido-principal" tabIndex={-1} className="min-h-screen bg-[#f4f8fc] px-6 py-14 text-slate-800">
         <section className="mx-auto max-w-[1120px]">
           <div className="rounded-[30px] bg-[#001b4f] p-8 text-white shadow-xl md:p-10">
             <p className="text-sm font-black uppercase tracking-[0.25em] text-cyan-200">
@@ -42,7 +42,7 @@ export default async function AdminPage() {
               </h1>
               <LogoutButton />
             </div>
-            <p className="mt-3 text-white/75">Rol activo: {user.role}</p>
+            <p className="mt-3 text-white/90">Rol activo: {user.role}</p>
           </div>
 
           <div className="mt-8 grid gap-6 md:grid-cols-2">

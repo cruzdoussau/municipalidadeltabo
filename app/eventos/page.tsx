@@ -29,7 +29,7 @@ export default function EventosPage() {
     <>
       <Header />
 
-      <main className="min-h-screen bg-[#f4f8fc] text-slate-800">
+      <main id="contenido-principal" tabIndex={-1} className="min-h-screen bg-[#f4f8fc] text-slate-800">
         <section className="relative overflow-hidden bg-gradient-to-br from-[#00174a] via-[#0b4ca8] to-[#00a6d6] text-white">
           <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1800&q=80')] bg-cover bg-center opacity-25" />
           <div className="absolute inset-0 bg-gradient-to-r from-[#00174a]/95 via-[#0b4ca8]/85 to-[#00174a]/55" />
@@ -93,12 +93,17 @@ export default function EventosPage() {
                 </p>
               </div>
 
-              <input
-                value={query}
-                onChange={(event) => setQuery(event.target.value)}
-                placeholder="Buscar evento o palabra clave..."
-                className="h-14 rounded-2xl border border-slate-200 bg-slate-50 px-5 text-sm outline-none ring-blue-200 transition focus:ring-4"
-              />
+              <div>
+                <label htmlFor="buscar-eventos" className="sr-only">Buscar eventos</label>
+                <input
+                  id="buscar-eventos"
+                  type="search"
+                  value={query}
+                  onChange={(event) => setQuery(event.target.value)}
+                  placeholder="Buscar evento o palabra clave..."
+                  className="h-14 w-full rounded-2xl border border-slate-200 bg-slate-50 px-5 text-sm outline-none ring-blue-200 transition focus:ring-4"
+                />
+              </div>
             </div>
 
             <div className="mt-6 flex flex-wrap gap-3">
@@ -114,9 +119,11 @@ export default function EventosPage() {
                         ? "bg-blue-700 text-white shadow"
                         : "bg-slate-50 text-[#17356f] hover:bg-blue-50"
                     }`}
+                    aria-pressed={isActive}
+                    aria-controls="resultados-eventos"
                     type="button"
                   >
-                    {categoria.icon && <span>{categoria.icon}</span>}
+                    {categoria.icon && <span aria-hidden="true">{categoria.icon}</span>}
                     {categoria.label}
                   </button>
                 );
@@ -124,7 +131,11 @@ export default function EventosPage() {
             </div>
           </div>
 
-          <div className="mt-10 grid gap-8 md:grid-cols-2 lg:grid-cols-3 xl:gap-10">
+          <p className="mt-6 text-sm font-semibold text-slate-700" role="status" aria-live="polite">
+            {eventosFiltrados.length} {eventosFiltrados.length === 1 ? "evento encontrado" : "eventos encontrados"}.
+          </p>
+
+          <div id="resultados-eventos" className="mt-10 grid gap-8 md:grid-cols-2 lg:grid-cols-3 xl:gap-10">
             {eventosFiltrados.map((e, index) => (
               <article
                 key={`${e.title}-${e.fecha}-${index}`}

@@ -40,7 +40,7 @@ export default async function NoticiaDetallePage({
   return (
     <>
       <Header />
-      <main className="min-h-screen bg-[#f6f8fb] text-slate-800">
+      <main id="contenido-principal" tabIndex={-1} className="min-h-screen bg-[#f6f8fb] text-slate-800">
         <section className="bg-[#001b4f] px-6 py-14 text-white">
           <div className="mx-auto max-w-[1120px]">
             <Link
@@ -104,6 +104,7 @@ export default async function NoticiaDetallePage({
                   href={noticia.sourceUrl}
                   target="_blank"
                   rel="noreferrer"
+                  aria-label="Ver publicación original de la noticia (se abre en una nueva pestaña)"
                   className="inline-flex rounded-full bg-slate-100 px-6 py-3 text-sm font-black text-[#00174a] ring-1 ring-slate-200"
                 >
                   Ver publicación original ↗

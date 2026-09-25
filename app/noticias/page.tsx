@@ -42,7 +42,7 @@ export default function NoticiasPage() {
     <>
       <Header />
 
-      <main className="min-h-screen bg-[#f4f8fc] text-slate-800">
+      <main id="contenido-principal" tabIndex={-1} className="min-h-screen bg-[#f4f8fc] text-slate-800">
         <section className="relative overflow-hidden bg-gradient-to-br from-[#00174a] via-[#0b4ca8] to-[#00a6d6] text-white">
           <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=1800&q=80')] bg-cover bg-center opacity-20" />
           <div className="absolute inset-0 bg-gradient-to-r from-[#00174a]/95 via-[#0b4ca8]/85 to-[#00174a]/55" />
@@ -105,12 +105,17 @@ export default function NoticiasPage() {
                 </p>
               </div>
 
-              <input
-                value={query}
-                onChange={(event) => setQuery(event.target.value)}
-                placeholder="Buscar noticia o palabra clave..."
-                className="h-14 rounded-2xl border border-slate-200 bg-slate-50 px-5 text-sm outline-none ring-blue-200 transition focus:ring-4"
-              />
+              <div>
+                <label htmlFor="buscar-noticias" className="sr-only">Buscar noticias</label>
+                <input
+                  id="buscar-noticias"
+                  type="search"
+                  value={query}
+                  onChange={(event) => setQuery(event.target.value)}
+                  placeholder="Buscar noticia o palabra clave..."
+                  className="h-14 w-full rounded-2xl border border-slate-200 bg-slate-50 px-5 text-sm outline-none ring-blue-200 transition focus:ring-4"
+                />
+              </div>
             </div>
 
             <div className="mt-6 flex flex-wrap gap-3">
@@ -126,9 +131,11 @@ export default function NoticiasPage() {
                         ? "bg-blue-700 text-white shadow"
                         : "bg-slate-50 text-[#17356f] hover:bg-blue-50"
                     }`}
+                    aria-pressed={active}
+                    aria-controls="resultados-noticias"
                     type="button"
                   >
-                    <span>{item.icon}</span>
+                    <span aria-hidden="true">{item.icon}</span>
                     {item.label}
                   </button>
                 );
@@ -136,7 +143,11 @@ export default function NoticiasPage() {
             </div>
           </div>
 
-          <div className="mt-10 grid gap-8 md:grid-cols-2 lg:grid-cols-3 xl:gap-10">
+          <p className="mt-6 text-sm font-semibold text-slate-700" role="status" aria-live="polite">
+            {noticiasFiltradas.length} {noticiasFiltradas.length === 1 ? "noticia encontrada" : "noticias encontradas"}.
+          </p>
+
+          <div id="resultados-noticias" className="mt-10 grid gap-8 md:grid-cols-2 lg:grid-cols-3 xl:gap-10">
             {noticiasFiltradas.map((item, index) => (
               <article
                key={`${item.title}-${index}`}

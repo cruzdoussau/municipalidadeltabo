@@ -1,6 +1,7 @@
 "use client";
 
 import React from "react";
+import Link from "next/link";
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
 
@@ -403,7 +404,7 @@ export default function TalleresPage() {
     <>
       <Header />
 
-      <main className="min-h-screen bg-[#f4f8fc] text-slate-800">
+      <main id="contenido-principal" tabIndex={-1} className="min-h-screen bg-[#f4f8fc] text-slate-800">
         <section className="relative overflow-hidden bg-gradient-to-br from-[#00174a] via-[#0b4ca8] to-[#00bcd4] text-white">
           <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1517048676732-d65bc937f952?auto=format&fit=crop&w=1800&q=80')] bg-cover bg-center opacity-20" />
           <div className="absolute inset-0 bg-gradient-to-r from-[#00174a]/95 via-[#0b4ca8]/85 to-[#00174a]/50" />
@@ -427,6 +428,7 @@ export default function TalleresPage() {
                 href={FORM_URL}
                 target="_blank"
                 rel="noreferrer"
+                aria-label="Inscribirme en talleres (se abre en una nueva pestaña)"
                 className="rounded-full bg-white px-8 py-4 text-center font-black text-[#00174a] shadow-lg"
               >
                 Inscribirme en talleres
@@ -570,16 +572,22 @@ export default function TalleresPage() {
                       ? "bg-blue-700 text-white shadow"
                       : "bg-slate-50 text-[#17356f] hover:bg-blue-50"
                   }`}
+                  aria-pressed={active}
+                  aria-controls="resultados-talleres"
                   type="button"
                 >
-                  <span>{item.icon}</span>
+                  <span aria-hidden="true">{item.icon}</span>
                   {item.label}
                 </button>
               );
             })}
           </div>
 
-          <div className="mt-8 grid gap-5 md:grid-cols-2 lg:grid-cols-3">
+          <p className="mt-6 text-sm font-semibold text-slate-700" role="status" aria-live="polite">
+            {talleresFiltrados.length} {talleresFiltrados.length === 1 ? "taller encontrado" : "talleres encontrados"}.
+          </p>
+
+          <div id="resultados-talleres" className="mt-8 grid gap-5 md:grid-cols-2 lg:grid-cols-3">
             {talleresFiltrados.map((item) => (
               <article
                 key={`${item.nombre}-${item.recinto}-${item.horario}`}
@@ -619,6 +627,7 @@ export default function TalleresPage() {
                   href={FORM_URL}
                   target="_blank"
                   rel="noreferrer"
+                  aria-label={`Inscribirme en ${item.nombre} (se abre en una nueva pestaña)`}
                   className="mt-6 block rounded-full bg-blue-700 px-5 py-3 text-center text-sm font-black text-white"
                 >
                   Inscribirme →
@@ -671,17 +680,18 @@ export default function TalleresPage() {
                   href={FORM_URL}
                   target="_blank"
                   rel="noreferrer"
+                  aria-label="Ir al formulario de inscripción (se abre en una nueva pestaña)"
                   className="flex w-full items-center justify-center rounded-2xl bg-white px-6 py-4 text-center font-black text-[#00174a] shadow-lg"
                 >
                   Ir al formulario de inscripción
                 </a>
 
-                <a
+                <Link
                   href="/"
                   className="flex w-full items-center justify-center rounded-2xl border border-white/25 bg-white/10 px-6 py-4 text-center font-black text-white"
                 >
                   Volver al inicio
-                </a>
+                </Link>
               </div>
             </div>
           </div>

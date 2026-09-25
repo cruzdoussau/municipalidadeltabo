@@ -55,7 +55,7 @@ export default function CosocPage() {
     <>
       <Header />
 
-      <main className="min-h-screen bg-[#f5f8fc] text-slate-800">
+      <main id="contenido-principal" tabIndex={-1} className="min-h-screen bg-[#f5f8fc] text-slate-800">
         <section className="relative overflow-hidden bg-[#08214a] text-white">
           <div className="absolute inset-0">
             <img

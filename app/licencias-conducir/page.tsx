@@ -36,7 +36,7 @@ export default function LicenciasConducirPage() {
   return (
     <>
     <Header />
-    <main className="bg-[#f4f8fc] text-slate-800">
+    <main id="contenido-principal" tabIndex={-1} className="bg-[#f4f8fc] text-slate-800">
       <section className="relative overflow-hidden bg-gradient-to-br from-[#00174a] via-[#0b4ca8] to-[#f2b705] text-white">
         <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?auto=format&fit=crop&w=1800&q=80')] bg-cover bg-center opacity-20" />
         <div className="absolute inset-0 bg-gradient-to-r from-[#00174a]/95 via-[#0b4ca8]/85 to-[#00174a]/60" />

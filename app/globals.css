@@ -3,6 +3,7 @@
 :root {
   --background: #ffffff;
   --foreground: #171717;
+  color-scheme: light;
 }
 
 @theme inline {
@@ -12,17 +13,159 @@
   --font-mono: var(--font-geist-mono);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-}
-
 body {
   background: var(--background);
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 140px;
+}
+
+main,
+section[id] {
+  scroll-margin-top: 140px;
+}
+
+:focus-visible {
+  outline: 3px solid #facc15 !important;
+  outline-offset: 3px !important;
+  box-shadow: 0 0 0 2px #00174a !important;
+}
+
+button,
+input,
+select,
+textarea,
+[role="button"] {
+  min-height: 44px;
+}
+
+.skip-link {
+  position: fixed;
+  left: 1rem;
+  top: 0.75rem;
+  z-index: 200;
+  transform: translateY(-180%);
+  border: 3px solid #ffffff;
+  border-radius: 0.75rem;
+  background: #00174a;
+  color: #ffffff;
+  padding: 0.75rem 1rem;
+  font-weight: 900;
+  transition: transform 150ms ease;
+}
+
+.skip-link:focus {
+  transform: translateY(0);
+}
+
+html[data-font-scale="125"] {
+  font-size: 125%;
+}
+
+html[data-font-scale="150"] {
+  font-size: 150%;
+}
+
+html[data-legible-font="true"] body,
+html[data-legible-font="true"] button,
+html[data-legible-font="true"] input,
+html[data-legible-font="true"] select,
+html[data-legible-font="true"] textarea {
+  font-family: Verdana, Arial, sans-serif !important;
+}
+
+html[data-underline-links="true"] a:not(.skip-link) {
+  text-decoration: underline !important;
+  text-decoration-thickness: 0.13em !important;
+  text-underline-offset: 0.2em !important;
+}
+
+html[data-text-spacing="true"] body {
+  letter-spacing: 0.04em !important;
+  word-spacing: 0.12em !important;
+  line-height: 1.6 !important;
+}
+
+html[data-grayscale="true"] img,
+html[data-grayscale="true"] video {
+  filter: grayscale(1) !important;
+}
+
+html[data-contrast="high"] body,
+html[data-contrast="high"] header,
+html[data-contrast="high"] nav,
+html[data-contrast="high"] main,
+html[data-contrast="high"] footer,
+html[data-contrast="high"] section,
+html[data-contrast="high"] article,
+html[data-contrast="high"] aside,
+html[data-contrast="high"] form,
+html[data-contrast="high"] [class*="bg-"] {
+  border-color: #ffffff !important;
+  background-color: #000000 !important;
+  background-image: none !important;
+  color: #ffffff !important;
+}
+
+html[data-contrast="high"] p,
+html[data-contrast="high"] h1,
+html[data-contrast="high"] h2,
+html[data-contrast="high"] h3,
+html[data-contrast="high"] h4,
+html[data-contrast="high"] h5,
+html[data-contrast="high"] h6,
+html[data-contrast="high"] span,
+html[data-contrast="high"] label,
+html[data-contrast="high"] li {
+  color: #ffffff !important;
+}
+
+html[data-contrast="high"] a,
+html[data-contrast="high"] button {
+  border-color: #ffffff !important;
+  background-color: #000000 !important;
+  color: #ffff00 !important;
+  text-decoration: underline !important;
+  text-underline-offset: 0.2em;
+}
+
+html[data-contrast="high"] input,
+html[data-contrast="high"] select,
+html[data-contrast="high"] textarea {
+  border: 2px solid #ffffff !important;
+  background: #000000 !important;
+  color: #ffffff !important;
+}
+
+html[data-contrast="high"] img {
+  outline: 1px solid #ffffff;
+}
+
+html[data-reduce-motion="true"] *,
+html[data-reduce-motion="true"] *::before,
+html[data-reduce-motion="true"] *::after {
+  scroll-behavior: auto !important;
+  animation-duration: 0.001ms !important;
+  animation-iteration-count: 1 !important;
+  transition-duration: 0.001ms !important;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
 }
 @keyframes heroKenBurns {
   0% {

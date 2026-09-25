@@ -122,14 +122,14 @@ export default function PortalLaboralPage() {
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    window.location.href = buildMailto(selected);
+    window.location.assign(buildMailto(selected));
   };
 
   return (
     <>
       <Header />
 
-      <main className="min-h-screen bg-[#f4f8fc] text-slate-800">
+      <main id="contenido-principal" tabIndex={-1} className="min-h-screen bg-[#f4f8fc] text-slate-800">
         <section className="relative overflow-hidden bg-[#071f4a] text-white">
           <div className="absolute inset-0">
             <img
@@ -322,6 +322,7 @@ export default function PortalLaboralPage() {
                 <label className="grid gap-2 text-sm font-black text-[#0b274e] sm:col-span-2">
                   Oferta laboral
                   <select
+                    name="oferta"
                     value={selectedId}
                     onChange={(event) => setSelectedId(event.target.value)}
                     className="h-12 rounded-lg border border-slate-200 bg-white px-4 text-sm font-semibold text-slate-700 outline-none ring-blue-200 transition focus:ring-4"
@@ -339,6 +340,7 @@ export default function PortalLaboralPage() {
                   <input
                     required
                     name="nombre"
+                    autoComplete="name"
                     className="h-12 rounded-lg border border-slate-200 bg-white px-4 text-sm font-semibold outline-none ring-blue-200 transition focus:ring-4"
                   />
                 </label>
@@ -348,6 +350,7 @@ export default function PortalLaboralPage() {
                   <input
                     required
                     name="rut"
+                    autoComplete="off"
                     className="h-12 rounded-lg border border-slate-200 bg-white px-4 text-sm font-semibold outline-none ring-blue-200 transition focus:ring-4"
                   />
                 </label>
@@ -358,6 +361,7 @@ export default function PortalLaboralPage() {
                     required
                     type="email"
                     name="correo"
+                    autoComplete="email"
                     className="h-12 rounded-lg border border-slate-200 bg-white px-4 text-sm font-semibold outline-none ring-blue-200 transition focus:ring-4"
                   />
                 </label>
@@ -367,6 +371,8 @@ export default function PortalLaboralPage() {
                   <input
                     required
                     name="telefono"
+                    type="tel"
+                    autoComplete="tel"
                     className="h-12 rounded-lg border border-slate-200 bg-white px-4 text-sm font-semibold outline-none ring-blue-200 transition focus:ring-4"
                   />
                 </label>

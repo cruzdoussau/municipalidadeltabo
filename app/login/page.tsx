@@ -55,7 +55,7 @@ export default function LoginPage() {
   return (
     <>
       <Header />
-      <main className="min-h-screen bg-[#eef5fb] px-6 py-16 text-slate-800">
+      <main id="contenido-principal" tabIndex={-1} className="min-h-screen bg-[#eef5fb] px-6 py-16 text-slate-800">
         <section className="mx-auto grid max-w-[1040px] overflow-hidden rounded-[30px] bg-white shadow-xl ring-1 ring-slate-200 md:grid-cols-[1fr_430px]">
           <div className="bg-[#001b4f] p-8 text-white md:p-12">
             <p className="text-sm font-black uppercase tracking-[0.25em] text-cyan-200">
@@ -93,9 +93,13 @@ export default function LoginPage() {
             <label className="mt-8 block text-sm font-black text-[#00174a]">
               Correo
               <input
+                required
                 value={email}
                 onChange={(event) => setEmail(event.target.value)}
                 type="email"
+                autoComplete="username"
+                aria-invalid={Boolean(error)}
+                aria-describedby={error ? "login-error" : undefined}
                 className="mt-2 h-12 w-full rounded-2xl border border-slate-200 bg-slate-50 px-4 font-normal outline-none ring-blue-200 transition focus:ring-4"
                 placeholder="usuario@eltabo.cl"
               />
@@ -104,16 +108,20 @@ export default function LoginPage() {
             <label className="mt-5 block text-sm font-black text-[#00174a]">
               Contraseña
               <input
+                required
                 value={password}
                 onChange={(event) => setPassword(event.target.value)}
                 type="password"
+                autoComplete="current-password"
+                aria-invalid={Boolean(error)}
+                aria-describedby={error ? "login-error" : undefined}
                 className="mt-2 h-12 w-full rounded-2xl border border-slate-200 bg-slate-50 px-4 font-normal outline-none ring-blue-200 transition focus:ring-4"
                 placeholder="••••••••"
               />
             </label>
 
             {error && (
-              <p className="mt-5 rounded-2xl bg-red-50 p-4 text-sm font-bold text-red-700">
+              <p id="login-error" role="alert" className="mt-5 rounded-2xl bg-red-50 p-4 text-sm font-bold text-red-700">
                 {error}
               </p>
             )}

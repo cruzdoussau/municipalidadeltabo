@@ -98,7 +98,7 @@ export default function NewsManager({
   }
 
   return (
-    <main className="min-h-screen bg-[#f4f8fc] px-6 py-12 text-slate-800">
+    <main id="contenido-principal" tabIndex={-1} className="min-h-screen bg-[#f4f8fc] px-6 py-12 text-slate-800">
       <section className="mx-auto max-w-[1180px]">
         <div className="rounded-[30px] bg-[#001b4f] p-8 text-white shadow-xl md:p-10">
           <p className="text-sm font-black uppercase tracking-[0.25em] text-cyan-200">
@@ -114,7 +114,7 @@ export default function NewsManager({
             Las publicaciones creadas aquí aparecen en el listado público y en
             una página interna con formato de noticia.
           </p>
-          <p className="mt-4 text-sm text-white/70">Sesión: {user.email}</p>
+          <p className="mt-4 text-sm text-white/90">Sesión: {user.email}</p>
         </div>
 
         <div className="mt-8 grid gap-8 lg:grid-cols-[1fr_420px]">

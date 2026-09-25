@@ -14,7 +14,7 @@ export default function CuentasPublicasPage() {
     <>
       <Header />
 
-      <main className="min-h-screen bg-[#f5f8fc] text-slate-800">
+      <main id="contenido-principal" tabIndex={-1} className="min-h-screen bg-[#f5f8fc] text-slate-800">
         <section className="bg-[#0b274e] text-white">
           <div className="mx-auto max-w-[1100px] px-6 py-12 md:py-16">
             <p className="text-sm font-bold uppercase tracking-[0.18em] text-[#ffd44d]">

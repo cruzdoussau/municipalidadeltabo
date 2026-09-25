@@ -30,7 +30,7 @@ export default async function MarketingPage() {
   return (
     <>
       <Header />
-      <main className="min-h-screen bg-[#f4f8fc] px-6 py-12 text-slate-800">
+      <main id="contenido-principal" tabIndex={-1} className="min-h-screen bg-[#f4f8fc] px-6 py-12 text-slate-800">
         <section className="mx-auto max-w-[1180px]">
           <div className="rounded-[30px] bg-[#001b4f] p-8 text-white shadow-xl md:p-10">
             <p className="text-sm font-black uppercase tracking-[0.25em] text-cyan-200">
@@ -46,7 +46,7 @@ export default async function MarketingPage() {
               Análisis de tráfico, comportamiento del usuario y métricas
               generales del sitio web.
             </p>
-            <p className="mt-4 text-sm text-white/70">{analytics.range}</p>
+            <p className="mt-4 text-sm text-white/90">{analytics.range}</p>
           </div>
 
           <div className="mt-8 grid gap-5 md:grid-cols-4">

@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState, type FocusEvent, type ReactNode } from "react";
 import Link from "next/link";
 
 const logo = "/images/header/logo-el-tabo.png";
@@ -289,11 +289,83 @@ function MegaMenuSection({ section }: { section: MenuSection }) {
   );
 }
 
+type DesktopMenuProps = {
+  id: "municipalidad" | "direcciones" | "dideco";
+  label: string;
+  isOpen: boolean;
+  onOpen: () => void;
+  onClose: () => void;
+  panelClassName: string;
+  children: ReactNode;
+};
+
+function DesktopMenu({
+  id,
+  label,
+  isOpen,
+  onOpen,
+  onClose,
+  panelClassName,
+  children,
+}: DesktopMenuProps) {
+  const handleBlur = (event: FocusEvent<HTMLDivElement>) => {
+    if (!event.currentTarget.contains(event.relatedTarget)) {
+      onClose();
+    }
+  };
+
+  return (
+    <div
+      className="relative"
+      onMouseEnter={onOpen}
+      onMouseLeave={onClose}
+      onBlur={handleBlur}
+    >
+      <button
+        type="button"
+        className="flex items-center gap-1 text-[17px] font-semibold tracking-[0.02em] text-white transition hover:text-[#8fc5ff]"
+        aria-expanded={isOpen}
+        aria-controls={`menu-${id}`}
+        onClick={onOpen}
+      >
+        {label}
+        <span aria-hidden="true" className="text-xs">
+          ▾
+        </span>
+      </button>
+
+      <div
+        id={`menu-${id}`}
+        hidden={!isOpen}
+        className={panelClassName}
+      >
+        {children}
+      </div>
+    </div>
+  );
+}
+
 export default function Header() {
   const [mobileOpen, setMobileOpen] = useState(false);
+  const [openMenu, setOpenMenu] = useState<DesktopMenuProps["id"] | null>(null);
+
+  useEffect(() => {
+    const closeMenus = (event: KeyboardEvent) => {
+      if (event.key === "Escape") {
+        setOpenMenu(null);
+        setMobileOpen(false);
+      }
+    };
+
+    document.addEventListener("keydown", closeMenus);
+    return () => document.removeEventListener("keydown", closeMenus);
+  }, []);
 
   return (
     <header className="sticky top-0 z-50 w-full shadow-md">
+      <a href="#contenido-principal" className="skip-link">
+        Saltar al contenido principal
+      </a>
       <div className="border-b border-slate-300 bg-[#e9ecef]">
         <div className="mx-auto flex h-[42px] max-w-[1040px] items-center justify-center gap-4 overflow-hidden px-4">
           {institutionalLinks.map((item) => (
@@ -303,10 +375,11 @@ export default function Header() {
               target="_blank"
               rel="noreferrer"
               className="flex shrink-0 items-center justify-center"
+              aria-label={`${item.alt} (se abre en una nueva pestaña)`}
             >
               <img
                 src={item.src}
-                alt={item.alt}
+                alt=""
                 className="h-[30px] w-auto object-contain"
               />
             </a>
@@ -314,7 +387,7 @@ export default function Header() {
         </div>
       </div>
 
-      <nav className="bg-[#00174a] text-white">
+      <nav className="bg-[#00174a] text-white" aria-label="Navegación principal">
         <div className="mx-auto flex h-[80px] max-w-[1040px] items-center justify-between px-4">
           <Link href="/" className="flex shrink-0 items-center">
             <img
@@ -332,15 +405,14 @@ export default function Header() {
               INICIO
             </Link>
 
-            <div className="group relative">
-              <Link
-                className="text-[17px] font-semibold tracking-[0.02em] text-white transition hover:text-[#8fc5ff]"
-                href="/#municipalidad"
-              >
-                MUNICIPALIDAD
-              </Link>
-
-              <div className="pointer-events-none absolute left-1/2 top-full w-[310px] -translate-x-1/2 pt-7 opacity-0 transition duration-200 group-hover:pointer-events-auto group-hover:opacity-100 group-focus-within:pointer-events-auto group-focus-within:opacity-100">
+            <DesktopMenu
+              id="municipalidad"
+              label="MUNICIPALIDAD"
+              isOpen={openMenu === "municipalidad"}
+              onOpen={() => setOpenMenu("municipalidad")}
+              onClose={() => setOpenMenu(null)}
+              panelClassName="absolute left-1/2 top-full w-[310px] -translate-x-1/2 pt-7"
+            >
                 <div className="max-h-[calc(100vh-150px)] overflow-y-auto rounded-lg bg-white text-[#00174a] shadow-2xl ring-1 ring-slate-200">
                   {municipalidadLinks.map((item) => (
                     <Link
@@ -352,18 +424,16 @@ export default function Header() {
                     </Link>
                   ))}
                 </div>
-              </div>
-            </div>
+            </DesktopMenu>
 
-            <div className="group relative">
-              <Link
-                className="text-[17px] font-semibold tracking-[0.02em] text-white transition hover:text-[#8fc5ff]"
-                href="/#direcciones"
-              >
-                DIRECCIONES
-              </Link>
-
-              <div className="pointer-events-none absolute left-1/2 top-full w-[620px] -translate-x-1/2 pt-7 opacity-0 transition duration-200 group-hover:pointer-events-auto group-hover:opacity-100 group-focus-within:pointer-events-auto group-focus-within:opacity-100">
+            <DesktopMenu
+              id="direcciones"
+              label="DIRECCIONES"
+              isOpen={openMenu === "direcciones"}
+              onOpen={() => setOpenMenu("direcciones")}
+              onClose={() => setOpenMenu(null)}
+              panelClassName="absolute left-1/2 top-full w-[620px] -translate-x-1/2 pt-7"
+            >
                 <div className="max-h-[calc(100vh-150px)] overflow-y-auto rounded-lg bg-white p-6 text-[#00174a] shadow-2xl ring-1 ring-slate-200">
                   <div className="grid gap-7 md:grid-cols-2">
                     {direccionesSections.map((section) => (
@@ -371,17 +441,15 @@ export default function Header() {
                     ))}
                   </div>
                 </div>
-              </div>
-            </div>
-            <div className="group relative">
-              <Link
-                className="text-[17px] font-semibold tracking-[0.02em] text-white transition hover:text-[#8fc5ff]"
-                href="/#dideco"
-              >
-                DIDECO
-              </Link>
-
-              <div className="pointer-events-none absolute right-0 top-full w-[min(920px,calc(100vw-32px))] pt-7 opacity-0 transition duration-200 group-hover:pointer-events-auto group-hover:opacity-100 group-focus-within:pointer-events-auto group-focus-within:opacity-100">
+            </DesktopMenu>
+            <DesktopMenu
+              id="dideco"
+              label="DIDECO"
+              isOpen={openMenu === "dideco"}
+              onOpen={() => setOpenMenu("dideco")}
+              onClose={() => setOpenMenu(null)}
+              panelClassName="absolute right-0 top-full w-[min(920px,calc(100vw-32px))] pt-7"
+            >
                 <div className="max-h-[calc(100vh-150px)] overflow-y-auto rounded-lg bg-white p-6 text-[#00174a] shadow-2xl ring-1 ring-slate-200">
                   <div className="grid gap-x-7 gap-y-8 md:grid-cols-3">
                     {didecoSections.map((section) => (
@@ -389,8 +457,7 @@ export default function Header() {
                     ))}
                   </div>
                 </div>
-              </div>
-            </div>
+            </DesktopMenu>
             <Link
               className="text-[17px] font-semibold tracking-[0.02em] text-white transition hover:text-[#8fc5ff]"
               href="/#contacto"
@@ -404,14 +471,15 @@ export default function Header() {
             onClick={() => setMobileOpen((open) => !open)}
             type="button"
             aria-expanded={mobileOpen}
-            aria-label="Abrir menú"
+            aria-controls="menu-movil"
+            aria-label={mobileOpen ? "Cerrar menú" : "Abrir menú"}
           >
             Menú
           </button>
         </div>
 
         {mobileOpen && (
-          <div className="max-h-[calc(100vh-122px)] overflow-y-auto border-t border-white/10 bg-[#00174a] px-4 pb-5 md:hidden">
+          <div id="menu-movil" className="max-h-[calc(100vh-122px)] overflow-y-auto border-t border-white/10 bg-[#00174a] px-4 pb-5 md:hidden">
             <div className="mx-auto max-w-[1040px] space-y-1 pt-3">
               <Link
                 className="block rounded-md px-3 py-3 text-sm font-black text-white hover:bg-white/10"
@@ -422,9 +490,9 @@ export default function Header() {
               </Link>
 
               <div className="rounded-md bg-white/5 p-2">
-                <p className="px-2 py-2 text-xs font-black uppercase tracking-[0.16em] text-[#ffd44d]">
+                <h2 className="px-2 py-2 text-xs font-black uppercase tracking-[0.16em] text-[#ffd44d]">
                   Municipalidad
-                </p>
+                </h2>
                 {municipalidadLinks.map((item) => (
                   <Link
                     key={item.href}
@@ -438,14 +506,14 @@ export default function Header() {
               </div>
 
               <div className="rounded-md bg-white/5 p-2">
-                <p className="px-2 py-2 text-xs font-black uppercase tracking-[0.16em] text-[#ffd44d]">
+                <h2 className="px-2 py-2 text-xs font-black uppercase tracking-[0.16em] text-[#ffd44d]">
                   Direcciones
-                </p>
+                </h2>
                 {direccionesSections.map((section) => (
                   <div key={section.title}>
-                    <p className="px-3 pb-1 pt-4 text-[11px] font-black uppercase tracking-[0.14em] text-[#ffd44d]">
+                    <h3 className="px-3 pb-1 pt-4 text-[11px] font-black uppercase tracking-[0.14em] text-[#ffd44d]">
                       {section.title}
-                    </p>
+                    </h3>
                     {section.links.map((item) => (
                       <Link
                         key={item.href}
@@ -460,16 +528,16 @@ export default function Header() {
                 ))}
               </div>
               <div className="rounded-md bg-white/5 p-2">
-                <p className="px-2 py-2 text-xs font-black uppercase tracking-[0.16em] text-[#ffd44d]">
+                <h2 className="px-2 py-2 text-xs font-black uppercase tracking-[0.16em] text-[#ffd44d]">
                   DIDECO
-                </p>
+                </h2>
                 {didecoSections.map((section) => (
                   <div key={section.title}>
-                    <p
+                    <h3
                       className="px-3 pb-1 pt-4 text-[11px] font-black uppercase tracking-[0.14em] text-[#ffd44d]"
                     >
                       {section.title}
-                    </p>
+                    </h3>
                     {section.links.map((item) => (
                       <Link
                         key={item.href}

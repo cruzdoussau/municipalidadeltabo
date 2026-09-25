@@ -44,7 +44,7 @@ export default function OficinaTransparenciaPage() {
     <>
       <Header />
 
-      <main className="min-h-screen bg-[#f5f8fc] text-slate-800">
+      <main id="contenido-principal" tabIndex={-1} className="min-h-screen bg-[#f5f8fc] text-slate-800">
         <section className="relative overflow-hidden bg-[#08214a] text-white">
           <div className="absolute inset-0 bg-[radial-gradient(circle_at_80%_20%,rgba(45,151,178,0.32),transparent_35%),linear-gradient(115deg,#061b3d,#0b376c)]" />
           <div className="relative mx-auto max-w-[1160px] px-6 py-14 md:py-20">
@@ -92,6 +92,7 @@ export default function OficinaTransparenciaPage() {
                   href={channel.href}
                   target="_blank"
                   rel="noreferrer"
+                  aria-label={`${channel.action} (se abre en una nueva pestaña)`}
                   className="mt-6 inline-flex w-fit rounded-full bg-[#0b4ca8] px-5 py-2.5 text-sm font-black text-white transition hover:bg-[#083b82]"
                 >
                   {channel.action} →

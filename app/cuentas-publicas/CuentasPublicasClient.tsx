@@ -130,6 +130,7 @@ export default function CuentasPublicasClient() {
             href={activeAccount.pdf}
             target="_blank"
             rel="noreferrer"
+            aria-label={`Abrir ${activeAccount.title} en PDF (se abre en una nueva pestaña)`}
             className="inline-flex items-center justify-center rounded-full bg-[#0b274e] px-5 py-3 text-sm font-black text-white shadow-sm transition hover:bg-[#143c74]"
           >
             Abrir PDF
