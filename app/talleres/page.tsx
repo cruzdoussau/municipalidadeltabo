@@ -1,6 +1,7 @@
 "use client";
 
 import React from "react";
+import Image from "next/image";
 import Link from "next/link";
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
@@ -391,6 +392,31 @@ const imagenesDestacadas = [
   },
 ];
 
+const talleresDestacadosSeptiembre = [
+  {
+    nombre: "Números que hablan: ¿cómo mejorar tus ventas?",
+    imagen: "/images/talleres/septiembre-numeros-ventas.png",
+    ancho: 612,
+    alto: 759,
+    fecha: "Martes 8 de septiembre de 2026",
+    horario: "12:00 a 14:00 h",
+    recinto: "Centro Cultural Nicanor Parra, José Dolores Tobar 901, Las Cruces",
+    inscripcion:
+      "Presencial en la Oficina de Fomento Productivo, Las Cruces Norte #401, de lunes a viernes entre 08:30 y 14:00 h.",
+  },
+  {
+    nombre: "Cómo hacer tu declaración de renta",
+    imagen: "/images/talleres/septiembre-declaracion-renta.png",
+    ancho: 601,
+    alto: 754,
+    fecha: "Miércoles 9 de septiembre de 2026",
+    horario: "12:00 a 14:00 h",
+    recinto: "Centro Cultural Nicanor Parra, Las Cruces",
+    inscripcion:
+      "Escribe a fomentoproductivo@eltabo.cl, llama al 35 2 203556 o inscríbete presencialmente en la Oficina de Fomento Productivo.",
+  },
+];
+
 export default function TalleresPage() {
   const [categoriaActiva, setCategoriaActiva] =
     React.useState<Categoria>("Todos");
@@ -519,16 +545,67 @@ export default function TalleresPage() {
             Programas y talleres destacados
           </h2>
 
-          <div className="mt-8 grid gap-6 md:grid-cols-2 lg:grid-cols-4">
+          <div className="mt-8 grid gap-8 lg:grid-cols-2">
+            {talleresDestacadosSeptiembre.map((item) => (
+              <article
+                key={item.nombre}
+                className="overflow-hidden rounded-[28px] bg-white shadow-sm ring-1 ring-slate-200"
+              >
+                <div className="bg-slate-100 p-3 sm:p-5">
+                  <Image
+                    src={item.imagen}
+                    alt={`Afiche del taller ${item.nombre}`}
+                    width={item.ancho}
+                    height={item.alto}
+                    sizes="(min-width: 1024px) 496px, (min-width: 640px) calc(100vw - 72px), calc(100vw - 56px)"
+                    className="mx-auto h-auto w-full rounded-2xl object-contain"
+                  />
+                </div>
+
+                <div className="p-6 sm:p-7">
+                  <span className="inline-flex rounded-full bg-orange-100 px-3 py-1.5 text-xs font-black uppercase tracking-wide text-orange-700">
+                    Septiembre 2026
+                  </span>
+
+                  <h3 className="mt-4 text-2xl font-black leading-tight text-[#00174a]">
+                    {item.nombre}
+                  </h3>
+
+                  <dl className="mt-5 space-y-3 text-sm leading-relaxed text-slate-700">
+                    <div>
+                      <dt className="font-black text-[#00174a]">Fecha y horario</dt>
+                      <dd>{item.fecha}, de {item.horario}.</dd>
+                    </div>
+                    <div>
+                      <dt className="font-black text-[#00174a]">Lugar</dt>
+                      <dd>{item.recinto}.</dd>
+                    </div>
+                    <div>
+                      <dt className="font-black text-[#00174a]">Inscripción</dt>
+                      <dd>{item.inscripcion}</dd>
+                    </div>
+                  </dl>
+                </div>
+              </article>
+            ))}
+          </div>
+
+          <h3 className="mt-12 text-2xl font-black text-[#00174a]">
+            Otros programas destacados
+          </h3>
+
+          <div className="mt-6 grid gap-6 md:grid-cols-2 lg:grid-cols-4">
             {imagenesDestacadas.map((item) => (
               <article
                 key={item.title}
                 className="overflow-hidden rounded-[24px] bg-white shadow-sm ring-1 ring-slate-200"
               >
-                <div className="h-72 bg-slate-200">
-                  <img
+                <div className="relative h-72 bg-slate-200">
+                  <Image
                     src={item.image}
                     alt={item.title}
+                    fill
+                    sizes="(min-width: 1024px) 242px, (min-width: 768px) 50vw, 100vw"
                     className="h-full w-full object-cover object-top"
                   />
                 </div>
