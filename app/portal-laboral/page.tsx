@@ -1,6 +1,7 @@
 "use client";
 
 import React from "react";
+import Image from "next/image";
 import Link from "next/link";
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
@@ -11,8 +12,12 @@ type Oferta = {
   area: string;
   fechaPublicacion: string;
   postulacion: string;
-  correo: string;
-  asunto: string;
+  modalidad: "Correo electrónico" | "Oficina de Partes";
+  correo?: string;
+  asunto?: string;
+  direccion?: string;
+  sourceUrl?: string;
+  basesUrl?: string;
   estado: "Abierta" | "Cerrada";
   resumen: string;
   funciones: string[];
@@ -30,11 +35,32 @@ const documentos = [
 
 const ofertas: Oferta[] = [
   {
+    id: "direccion-obras-ito",
+    cargo: "Inspector/a Técnico/a de Obras (ITO)",
+    area: "Dirección de Obras Municipales",
+    fechaPublicacion: "28 de septiembre de 2026",
+    postulacion: "Desde el 28 al 30 de septiembre de 2026, hasta las 14:00 horas.",
+    modalidad: "Oficina de Partes",
+    direccion: "Av. Las Cruces Norte N.° 401, Las Cruces, comuna de El Tabo.",
+    sourceUrl: "https://www.instagram.com/p/Dd1lW2ECXnr/",
+    basesUrl: "/documentos/portal-laboral/bases-inspector-tecnico-obras-2026.pdf",
+    estado: "Abierta",
+    resumen:
+      "La Municipalidad de El Tabo requiere contratar un/a Inspector/a Técnico/a de Obras para desempeñarse en la Dirección de Obras Municipales, bajo modalidad de prestación de servicios a honorarios.",
+    funciones: [
+      "Una vacante, con honorario bruto mensual de $1.200.000.",
+      "Título de Ingeniería Civil, Ingeniería en Construcción, Construcción Civil o Arquitectura.",
+      "Experiencia laboral mínima de un año en supervisión, inspección técnica, fiscalización o control de obras.",
+    ],
+    image: "/images/portal-laboral/oferta-inspector-tecnico-obras-2026.jpg",
+  },
+  {
     id: "direccion-juridica-abogado",
     cargo: "Abogado/a",
     area: "Dirección Jurídica",
     fechaPublicacion: "24 de agosto de 2026",
     postulacion: "Desde el 24 al 28 de agosto de 2026, hasta las 00:00 horas.",
+    modalidad: "Correo electrónico",
     correo: "juridico@eltabo.cl",
     asunto: "Postulación Abogado/a Dirección Jurídica",
     estado: "Cerrada",
@@ -55,6 +81,7 @@ const ofertas: Oferta[] = [
     area: "Programa Familias",
     fechaPublicacion: "12 de julio de 2026",
     postulacion: "Desde el 13 al 17 de julio de 2026, hasta las 14:00 horas.",
+    modalidad: "Correo electrónico",
     correo: "programafamilias@eltabo.cl",
     asunto: "concurso AFI",
     estado: "Cerrada",
@@ -73,6 +100,7 @@ const ofertas: Oferta[] = [
     area: "Programa Vínculos",
     fechaPublicacion: "3 de julio de 2026",
     postulacion: "Desde el 4 al 7 de julio de 2026.",
+    modalidad: "Correo electrónico",
     correo: "liliana.leiva@eltabo.cl",
     asunto: "Postulación Profesional Área Psicosocial Programa Vínculos",
     estado: "Cerrada",
@@ -88,6 +116,10 @@ const ofertas: Oferta[] = [
 ];
 
 function buildMailto(oferta: Oferta) {
+  if (!oferta.correo || !oferta.asunto) {
+    return "#postulacion";
+  }
+
   const body = [
     `Postulación al cargo: ${oferta.cargo}`,
     `Área: ${oferta.area}`,
@@ -132,9 +164,12 @@ export default function PortalLaboralPage() {
       <main id="contenido-principal" tabIndex={-1} className="min-h-screen bg-[#f4f8fc] text-slate-800">
         <section className="relative overflow-hidden bg-[#071f4a] text-white">
           <div className="absolute inset-0">
-            <img
-              src="/images/portal-laboral/oferta-direccion-juridica-abogado.jpg"
+            <Image
+              src="/images/portal-laboral/oferta-inspector-tecnico-obras-2026.jpg"
               alt="Portal laboral Municipalidad de El Tabo"
+              fill
+              priority
+              sizes="100vw"
               className="h-full w-full object-cover opacity-25"
             />
             <div className="absolute inset-0 bg-gradient-to-r from-[#061b3d] via-[#0b4ca8]/88 to-[#00a6d6]/62" />
@@ -179,8 +214,8 @@ export default function PortalLaboralPage() {
                 Postulación
               </p>
               <h2 className="mt-4 text-3xl font-black leading-tight">
-                Adjunta tus documentos y envía tus antecedentes al correo del
-                proceso.
+                Revisa cada convocatoria y sigue la modalidad de postulación
+                indicada.
               </h2>
               <div className="mt-6 grid gap-3 text-sm font-semibold text-white/90">
                 {documentos.slice(0, 4).map((item) => (
@@ -202,6 +237,10 @@ export default function PortalLaboralPage() {
               <h2 className="mt-3 text-3xl font-black leading-tight text-[#0b274e]">
                 Antecedentes para postular
               </h2>
+              <p className="mt-4 text-sm font-semibold leading-6 text-slate-600">
+                Esta lista es una guía general. Revisa siempre las bases de la
+                convocatoria para confirmar los documentos exigidos.
+              </p>
               <ul className="mt-6 grid gap-3">
                 {documentos.map((item) => (
                   <li
@@ -231,9 +270,11 @@ export default function PortalLaboralPage() {
                     className="grid overflow-hidden rounded-xl bg-white shadow-sm ring-1 ring-slate-200 md:grid-cols-[260px_1fr]"
                   >
                     <div className="relative min-h-[260px] bg-slate-200">
-                      <img
+                      <Image
                         src={oferta.image}
                         alt={oferta.cargo}
+                        fill
+                        sizes="(min-width: 768px) 260px, 100vw"
                         className="absolute inset-0 h-full w-full object-cover"
                       />
                     </div>
@@ -260,7 +301,7 @@ export default function PortalLaboralPage() {
 
                       <details className="mt-5 rounded-lg bg-[#f8fbff] p-4">
                         <summary className="cursor-pointer text-sm font-black text-[#0b274e]">
-                          Ver funciones y periodo
+                          Ver detalles del proceso
                         </summary>
                         <p className="mt-3 text-sm font-semibold text-slate-700">
                           Postulación: {oferta.postulacion}
@@ -279,7 +320,9 @@ export default function PortalLaboralPage() {
                         onClick={() => scrollToForm(oferta.id)}
                         className="mt-5 rounded-full bg-blue-700 px-6 py-3 text-sm font-black text-white shadow-md transition hover:bg-blue-800"
                       >
-                        Postular a esta oferta
+                        {oferta.modalidad === "Oficina de Partes"
+                          ? "Ver cómo postular"
+                          : "Postular a esta oferta"}
                       </button>
                     </div>
                   </article>
@@ -293,15 +336,15 @@ export default function PortalLaboralPage() {
           <div className="mx-auto grid max-w-[1160px] gap-8 px-6 lg:grid-cols-[0.95fr_1.05fr]">
             <div>
               <p className="text-sm font-bold uppercase tracking-[0.16em] text-[#2a5298]">
-                Formulario
+                Postulación
               </p>
               <h2 className="mt-2 text-4xl font-black leading-tight text-[#0b274e]">
-                Preparar postulación
+                Cómo postular
               </h2>
               <p className="mt-4 text-base leading-8 text-slate-600">
-                Selecciona la oferta, completa tus datos y adjunta los
-                antecedentes solicitados. El envío se prepara para el correo
-                oficial indicado en cada convocatoria.
+                Selecciona una oferta y revisa su modalidad de postulación. Los
+                procesos pueden requerir entrega presencial o el envío de
+                antecedentes a un correo oficial.
               </p>
               <div className="mt-6 rounded-xl bg-[#0b274e] p-6 text-white">
                 <p className="text-sm font-bold uppercase tracking-[0.16em] text-[#ffd44d]">
@@ -309,15 +352,70 @@ export default function PortalLaboralPage() {
                 </p>
                 <h3 className="mt-3 text-2xl font-black">{selected.cargo}</h3>
                 <p className="mt-2 text-sm font-semibold text-white/85">
-                  {selected.area} · {selected.correo}
+                  {selected.area} · {selected.modalidad}
                 </p>
               </div>
             </div>
 
-            <form
-              onSubmit={handleSubmit}
-              className="rounded-xl border border-[#e2eaf4] bg-[#f8fbff] p-6 shadow-sm"
-            >
+            {selected.modalidad === "Oficina de Partes" ? (
+              <div className="rounded-xl border border-[#e2eaf4] bg-[#f8fbff] p-6 shadow-sm">
+                <p className="text-sm font-black uppercase tracking-[0.16em] text-[#2a5298]">
+                  Entrega presencial
+                </p>
+                <h3 className="mt-3 text-2xl font-black text-[#0b274e]">
+                  Ingresa tus antecedentes en la Oficina de Partes
+                </h3>
+                <div className="mt-6 grid gap-4">
+                  <div className="rounded-lg border border-[#e2eaf4] bg-white p-4">
+                    <p className="text-xs font-black uppercase tracking-[0.14em] text-[#2a5298]">
+                      Dirección
+                    </p>
+                    <p className="mt-2 text-sm font-semibold leading-6 text-slate-700">
+                      {selected.direccion}
+                    </p>
+                  </div>
+                  <div className="rounded-lg border border-[#e2eaf4] bg-white p-4">
+                    <p className="text-xs font-black uppercase tracking-[0.14em] text-[#2a5298]">
+                      Plazo de postulación
+                    </p>
+                    <p className="mt-2 text-sm font-semibold leading-6 text-slate-700">
+                      {selected.postulacion}
+                    </p>
+                  </div>
+                </div>
+                <p className="mt-5 text-sm leading-7 text-slate-600">
+                  Revisa las bases y requisitos del proceso antes de presentar
+                  la documentación. No se reciben postulaciones mediante este
+                  formulario ni por correo electrónico.
+                </p>
+                <div className="mt-6 flex flex-col gap-3 sm:flex-row">
+                  {selected.basesUrl && (
+                    <a
+                      href={selected.basesUrl}
+                      target="_blank"
+                      rel="noreferrer"
+                      className="rounded-full bg-blue-700 px-7 py-4 text-center text-sm font-black text-white shadow-md transition hover:bg-blue-800"
+                    >
+                      Descargar bases oficiales
+                    </a>
+                  )}
+                  {selected.sourceUrl && (
+                    <a
+                      href={selected.sourceUrl}
+                      target="_blank"
+                      rel="noreferrer"
+                      className="rounded-full bg-white px-7 py-4 text-center text-sm font-black text-[#0b274e] shadow-sm ring-1 ring-slate-200 transition hover:bg-blue-50"
+                    >
+                      Ver publicación oficial
+                    </a>
+                  )}
+                </div>
+              </div>
+            ) : (
+              <form
+                onSubmit={handleSubmit}
+                className="rounded-xl border border-[#e2eaf4] bg-[#f8fbff] p-6 shadow-sm"
+              >
               <div className="grid gap-4 sm:grid-cols-2">
                 <label className="grid gap-2 text-sm font-black text-[#0b274e] sm:col-span-2">
                   Oferta laboral
@@ -407,7 +505,8 @@ export default function PortalLaboralPage() {
                   Escribir al correo
                 </a>
               </div>
-            </form>
+              </form>
+            )}
           </div>
         </section>
       </main>
