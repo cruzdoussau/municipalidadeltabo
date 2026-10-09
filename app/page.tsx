@@ -282,6 +282,200 @@ const noticiasDestacadas = [
     slug: "el-tabo-celebra-a-sus-dirigentes-sociales-mirando-al-futuro",
   },
 ];
+
+const destacadosPrincipales = [
+  {
+    title: "El Tabo, más cerca de ti",
+    image: "/images/destacados/becas-educacion-superior.webp",
+    href: "https://eltabo.cl/municipalidad-de-el-tabo-abre-proceso-de-postulacion-a-becas-para-estudiantes-de-educacion-superior/",
+  },
+  {
+    title: "Asesoría Satélite Sercotec: inscripciones segundo semestre",
+    image: "/images/destacados/aviso-institucional.webp",
+    href: "https://www.instagram.com/p/Dbq1v9JAfb1/",
+  },
+  {
+    title: "Beca Municipal de Educación Superior 2026",
+    image: "/images/destacados/becas-municipales.webp",
+    href: "https://eltabo.cl/municipalidad-de-el-tabo-abre-proceso-de-postulacion-a-becas-para-estudiantes-de-educacion-superior/",
+  },
+  {
+    title: "Sistema de Información Territorial de El Tabo (SITET)",
+    image: "/images/destacados/sitet.webp",
+    href: "https://arcg.is/9LKfi",
+  },
+  {
+    title: "Inscripción a servicios veterinarios",
+    image: "/images/destacados/inscripcion-mascotas.webp",
+    href: "https://docs.google.com/forms/d/e/1FAIpQLSeQySbr4HwyN0g3Cann0E0oTPe1ECMMWycpZzioXsMQlBN-IQ/viewform?pli=1",
+  },
+  {
+    title: "Vecino Digital: portal de pagos en línea",
+    image: "/images/destacados/vecino-digital.webp",
+    href: "https://eltabo.vecinodigital.cl/Vecino_Digital/",
+  },
+  {
+    title: "Concesión de estacionamientos 2025–2026",
+    image: "/images/destacados/aviso-comunitario.webp",
+    href: "https://www.instagram.com/p/DRuMiz1AJyt/?hl=es",
+  },
+];
+
+function DestacadosPrincipales() {
+  const [active, setActive] = React.useState(0);
+  const [isPlaying, setIsPlaying] = React.useState(true);
+  const [isPointerOver, setIsPointerOver] = React.useState(false);
+  const [isFocusWithin, setIsFocusWithin] = React.useState(false);
+  const destacado = destacadosPrincipales[active];
+
+  const next = React.useCallback(() => {
+    setActive((current) => (current + 1) % destacadosPrincipales.length);
+  }, []);
+
+  const prev = () => {
+    setActive(
+      (current) =>
+        (current - 1 + destacadosPrincipales.length) %
+        destacadosPrincipales.length
+    );
+  };
+
+  React.useEffect(() => {
+    const prefersReducedMotion = window.matchMedia(
+      "(prefers-reduced-motion: reduce)"
+    ).matches;
+
+    if (!isPlaying || isPointerOver || isFocusWithin || prefersReducedMotion) {
+      return;
+    }
+
+    const interval = window.setInterval(next, 6500);
+    return () => window.clearInterval(interval);
+  }, [isFocusWithin, isPlaying, isPointerOver, next]);
+
+  return (
+    <section
+      aria-labelledby="destacados-principales-titulo"
+      className="bg-[#061f5c]"
+      onMouseEnter={() => setIsPointerOver(true)}
+      onMouseLeave={() => setIsPointerOver(false)}
+      onFocusCapture={() => setIsFocusWithin(true)}
+      onBlurCapture={() => setIsFocusWithin(false)}
+    >
+      <h2 id="destacados-principales-titulo" className="sr-only">
+        Información destacada
+      </h2>
+
+      <p className="sr-only" role="status" aria-live="polite">
+        Destacado {active + 1} de {destacadosPrincipales.length}: {destacado.title}
+      </p>
+
+      <div
+        id="destacados-panel"
+        className="relative mx-auto aspect-[3/1] min-h-[150px] w-full max-w-[1600px] overflow-hidden bg-[#03143d] md:aspect-[4/1] md:min-h-0"
+        role="group"
+        aria-roledescription="diapositiva"
+        aria-label={`${active + 1} de ${destacadosPrincipales.length}`}
+      >
+        {destacadosPrincipales.map((item, index) => (
+          <a
+            key={item.image}
+            href={item.href}
+            target="_blank"
+            rel="noreferrer"
+            tabIndex={active === index ? 0 : -1}
+            aria-hidden={active !== index}
+            aria-label={`${item.title} (se abre en una nueva pestaña)`}
+            className={`absolute inset-0 transition-opacity duration-700 motion-reduce:transition-none ${
+              active === index
+                ? "z-10 opacity-100"
+                : "pointer-events-none opacity-0"
+            }`}
+          >
+            <Image
+              src={item.image}
+              alt=""
+              fill
+              priority={index === 0}
+              sizes="100vw"
+              className="object-contain"
+            />
+          </a>
+        ))}
+
+        <button
+          type="button"
+          onClick={prev}
+          aria-label="Ver destacado anterior"
+          aria-controls="destacados-panel"
+          className="absolute left-2 top-1/2 z-20 grid h-11 w-11 -translate-y-1/2 place-items-center rounded-full bg-[#061f5c]/85 text-2xl font-black text-white shadow-lg transition hover:bg-[#061f5c] md:left-5"
+        >
+          <span aria-hidden="true">‹</span>
+        </button>
+
+        <button
+          type="button"
+          onClick={next}
+          aria-label="Ver destacado siguiente"
+          aria-controls="destacados-panel"
+          className="absolute right-2 top-1/2 z-20 grid h-11 w-11 -translate-y-1/2 place-items-center rounded-full bg-[#061f5c]/85 text-2xl font-black text-white shadow-lg transition hover:bg-[#061f5c] md:right-5"
+        >
+          <span aria-hidden="true">›</span>
+        </button>
+      </div>
+
+      <div className="mx-auto flex max-w-[1600px] flex-col gap-3 px-4 py-3 text-white md:flex-row md:items-center md:justify-between">
+        <div className="flex min-w-0 items-center gap-3">
+          <p className="truncate text-sm font-black md:text-base">
+            {destacado.title}
+          </p>
+          <a
+            href={destacado.href}
+            target="_blank"
+            rel="noreferrer"
+            className="shrink-0 rounded-full bg-white px-4 py-2 text-xs font-black text-[#061f5c] transition hover:bg-blue-50"
+            aria-label={`Abrir ${destacado.title} (se abre en una nueva pestaña)`}
+          >
+            Ver información
+          </a>
+        </div>
+
+        <div className="flex flex-wrap items-center justify-center gap-2" aria-label="Controles de información destacada">
+          {destacadosPrincipales.map((item, index) => (
+            <button
+              key={item.title}
+              type="button"
+              onClick={() => setActive(index)}
+              aria-label={`Ver destacado ${index + 1}: ${item.title}`}
+              aria-pressed={active === index}
+              aria-controls="destacados-panel"
+              className="group grid h-11 w-7 place-items-center rounded-full"
+            >
+              <span
+                aria-hidden="true"
+                className={`h-2.5 rounded-full transition-all motion-reduce:transition-none ${
+                  active === index
+                    ? "w-7 bg-white"
+                    : "w-2.5 bg-white/45 group-hover:bg-white/75"
+                }`}
+              />
+            </button>
+          ))}
+
+          <button
+            type="button"
+            onClick={() => setIsPlaying((playing) => !playing)}
+            aria-pressed={!isPlaying}
+            className="ml-2 rounded-full border border-white/50 px-3 py-1.5 text-xs font-black transition hover:bg-white hover:text-[#061f5c]"
+          >
+            {isPlaying ? "Pausar" : "Reanudar"}
+          </button>
+        </div>
+      </div>
+    </section>
+  );
+}
+
 const heroImages = [
   "/images/home/hero/el-tabo-1.png",
   "/images/home/hero/el-tabo-2.webp",
@@ -837,6 +1031,7 @@ export default function HomePage() {
     <>
       <Header />
       <main id="contenido-principal" tabIndex={-1} className="min-h-screen bg-white text-slate-900">
+        <DestacadosPrincipales />
         <Hero />
         <NoticiasSlider />
         <CarteleraEventos />
