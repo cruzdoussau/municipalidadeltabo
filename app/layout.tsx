@@ -1,16 +1,20 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Montserrat, Roboto } from "next/font/google";
 import AccessibilityToolbar from "@/components/accessibility/AccessibilityToolbar";
 import "./globals.css";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
+const montserrat = Montserrat({
+  variable: "--font-heading",
   subsets: ["latin"],
+  weight: "variable",
+  display: "swap",
 });
 
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
+const roboto = Roboto({
+  variable: "--font-body",
   subsets: ["latin"],
+  weight: "variable",
+  display: "swap",
 });
 
 export const metadata: Metadata = {
@@ -27,7 +31,7 @@ export default function RootLayout({
   return (
     <html
       lang="es"
-      className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
+      className={`${montserrat.variable} ${roboto.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col">
         {children}
