@@ -35,6 +35,25 @@ const documentos = [
 
 const ofertas: Oferta[] = [
   {
+    id: "programa-acceso-justicia-abogado",
+    cargo: "Abogado/a",
+    area: "DIDECO · Programa Acceso a la Justicia",
+    fechaPublicacion: "28 de octubre de 2026",
+    postulacion: "Desde el 28 al 29 de octubre de 2026, hasta las 00:00 horas.",
+    modalidad: "Correo electrónico",
+    correo: "postulacionesmunieltabo@gmail.com",
+    asunto: "postulación cargo abogado programa acceso a la justicia",
+    estado: "Cerrada",
+    resumen:
+      "La Municipalidad de El Tabo abrió una convocatoria para contratar a un/a abogado/a para el Programa Acceso a la Justicia, dependiente de la Dirección de Desarrollo Comunitario (DIDECO).",
+    funciones: [
+      "Brindar atención y orientación jurídica a vecinos y vecinas que requieran apoyo legal.",
+      "Apoyar la asistencia y el patrocinio de causas en materias de familia y civiles, de acuerdo con la cobertura del programa.",
+      "Coordinar derivaciones y acciones con los equipos municipales y las redes públicas pertinentes.",
+    ],
+    image: "/images/portal-laboral/oferta-programa-acceso-justicia-abogado-2026.png",
+  },
+  {
     id: "direccion-obras-ito",
     cargo: "Inspector/a Técnico/a de Obras (ITO)",
     area: "Dirección de Obras Municipales",
@@ -44,7 +63,7 @@ const ofertas: Oferta[] = [
     direccion: "Av. Las Cruces Norte N.° 401, Las Cruces, comuna de El Tabo.",
     sourceUrl: "https://www.instagram.com/p/Dd1lW2ECXnr/",
     basesUrl: "/documentos/portal-laboral/bases-inspector-tecnico-obras-2026.pdf",
-    estado: "Abierta",
+    estado: "Cerrada",
     resumen:
       "La Municipalidad de El Tabo requiere contratar un/a Inspector/a Técnico/a de Obras para desempeñarse en la Dirección de Obras Municipales, bajo modalidad de prestación de servicios a honorarios.",
     funciones: [
@@ -320,7 +339,9 @@ export default function PortalLaboralPage() {
                         onClick={() => scrollToForm(oferta.id)}
                         className="mt-5 rounded-full bg-blue-700 px-6 py-3 text-sm font-black text-white shadow-md transition hover:bg-blue-800"
                       >
-                        {oferta.modalidad === "Oficina de Partes"
+                        {oferta.estado === "Cerrada"
+                          ? "Ver estado del proceso"
+                          : oferta.modalidad === "Oficina de Partes"
                           ? "Ver cómo postular"
                           : "Postular a esta oferta"}
                       </button>
@@ -357,7 +378,38 @@ export default function PortalLaboralPage() {
               </div>
             </div>
 
-            {selected.modalidad === "Oficina de Partes" ? (
+            {selected.estado === "Cerrada" ? (
+              <div className="rounded-xl border border-[#e2eaf4] bg-[#f8fbff] p-6 shadow-sm">
+                <p className="text-sm font-black uppercase tracking-[0.16em] text-[#2a5298]">
+                  Proceso finalizado
+                </p>
+                <h3 className="mt-3 text-2xl font-black text-[#0b274e]">
+                  Esta convocatoria ya cerró sus postulaciones
+                </h3>
+                <div className="mt-6 rounded-lg border border-[#e2eaf4] bg-white p-4">
+                  <p className="text-xs font-black uppercase tracking-[0.14em] text-[#2a5298]">
+                    Plazo de postulación
+                  </p>
+                  <p className="mt-2 text-sm font-semibold leading-6 text-slate-700">
+                    {selected.postulacion}
+                  </p>
+                </div>
+                <p className="mt-5 text-sm leading-7 text-slate-600">
+                  La información se mantiene disponible como referencia. No se
+                  reciben nuevas postulaciones para este proceso.
+                </p>
+                {selected.sourceUrl && (
+                  <a
+                    href={selected.sourceUrl}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="mt-6 inline-block rounded-full bg-white px-7 py-4 text-center text-sm font-black text-[#0b274e] shadow-sm ring-1 ring-slate-200 transition hover:bg-blue-50"
+                  >
+                    Ver publicación oficial
+                  </a>
+                )}
+              </div>
+            ) : selected.modalidad === "Oficina de Partes" ? (
               <div className="rounded-xl border border-[#e2eaf4] bg-[#f8fbff] p-6 shadow-sm">
                 <p className="text-sm font-black uppercase tracking-[0.16em] text-[#2a5298]">
                   Entrega presencial
