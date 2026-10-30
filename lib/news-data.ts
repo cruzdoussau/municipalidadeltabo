@@ -1,3 +1,5 @@
+import octoberNews from "../data/noticias-octubre-2026.json";
+
 export type CategoriaNoticia =
   | "Todas"
   | "Municipalidad"
@@ -41,7 +43,7 @@ export const categoriasNoticias: { label: CategoriaNoticia; icon: string }[] = [
   { label: "Seguridad", icon: "🛡️" },
 ];
 
-export const initialNoticias: Noticia[] = [
+const legacyNoticias: Noticia[] = [
   {
     id: "agosto-2026-omil-seminario-financiamiento",
     slug: "omil-de-el-tabo-realiza-seminario-sobre-financiamiento-y-empleo",
@@ -222,4 +224,9 @@ export const initialNoticias: Noticia[] = [
     ],
     tags: ["Muni en Terreno", "Servicios municipales"],
   },
+];
+
+export const initialNoticias: Noticia[] = [
+  ...(octoberNews as Noticia[]),
+  ...legacyNoticias,
 ];

@@ -7,6 +7,12 @@ const dataDir = path.join(process.cwd(), "data");
 const newsFile = path.join(dataDir, "noticias.json");
 const migratedNoticias = migratedNews as Noticia[];
 
+function mergeNews(stored: Noticia[]) {
+  const bySlug = new Map(initialNoticias.map((item) => [item.slug, item]));
+  for (const item of stored) bySlug.set(item.slug, item);
+  return [...bySlug.values()].sort((a, b) => b.publishedAt.localeCompare(a.publishedAt));
+}
+
 type CreateNoticiaInput = Omit<Noticia, "id" | "slug" | "author"> & {
   author?: string;
   slug?: string;
@@ -38,12 +44,9 @@ export async function getNews() {
     const raw = await fs.readFile(newsFile, "utf8");
     const news = JSON.parse(raw) as Noticia[];
 
-    return news.sort(
-      (a, b) =>
-        new Date(b.publishedAt).getTime() - new Date(a.publishedAt).getTime()
-    );
+    return mergeNews(news);
   } catch {
-    return migratedNoticias.length ? migratedNoticias : initialNoticias;
+    return mergeNews(migratedNoticias);
   }
 }
 

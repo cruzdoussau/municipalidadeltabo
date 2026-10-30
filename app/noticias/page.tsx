@@ -15,6 +15,7 @@ export default function NoticiasPage() {
   const [categoriaActiva, setCategoriaActiva] =
     React.useState<CategoriaNoticia>("Todas");
   const [query, setQuery] = React.useState("");
+  const [mes, setMes] = React.useState("");
   const [noticias, setNoticias] = React.useState<Noticia[]>(initialNoticias);
 
   React.useEffect(() => {
@@ -35,7 +36,7 @@ export default function NoticiasPage() {
     const texto = `${item.title} ${item.category} ${item.excerpt}`.toLowerCase();
     const coincideBusqueda = texto.includes(query.toLowerCase());
 
-    return coincideCategoria && coincideBusqueda;
+    return coincideCategoria && coincideBusqueda && (!mes || item.publishedAt.startsWith(mes));
   });
 
   return (
@@ -106,6 +107,15 @@ export default function NoticiasPage() {
               </div>
 
               <div>
+                <label className="mb-3 grid gap-2 text-sm font-bold text-[#00174a]">
+                  Mes de publicación
+                  <select value={mes} onChange={(event) => setMes(event.target.value)} className="h-12 w-full rounded-lg border border-slate-200 bg-white px-4">
+                    <option value="">Todos los meses</option>
+                    {[...new Set(noticias.map((item) => item.publishedAt.slice(0, 7)))].sort().reverse().map((month) => (
+                      <option key={month} value={month}>{new Intl.DateTimeFormat("es-CL", { month: "long", year: "numeric" }).format(new Date(`${month}-15T12:00:00`))}</option>
+                    ))}
+                  </select>
+                </label>
                 <label htmlFor="buscar-noticias" className="sr-only">Buscar noticias</label>
                 <input
                   id="buscar-noticias"
